@@ -10,7 +10,6 @@ type DialoguesType = {
 }
 
 const Dialogues = (props: DialoguesType) => {
-
     let dialoguesElements = props.dialogues.map (d => <DialogueItem name={d.name} id={d.id} />);
 
     let messagesElements = props.messages.map (m => <Message message={m.message}/>);

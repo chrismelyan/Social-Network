@@ -9,7 +9,7 @@ type DialogueItemType = {
 const DialogueItem = (props: DialogueItemType) => {
     return (
         <div className={s.item}>
-            <NavLink to={'/dialogues/' + props.id} className={({isActive}) => isActive ? s.active : s.inactive}>{props.name}</NavLink>
+            <NavLink to={`/dialogues/${props.id}`} className={({isActive}) => isActive ? s.active : s.inactive}>{props.name}</NavLink>
         </div>
     );
 };
