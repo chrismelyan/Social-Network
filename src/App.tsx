@@ -8,27 +8,11 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import Music from "./components/Pages/Music/Music";
 import News from "./components/Pages/News/News";
 import Settings from "./components/Pages/Settings/Settings";
+import {RootStateType} from "./redux/state";
 
 export type AppType = {
-    state: StateType
-}
-export type StateType = {
-    posts: Array<PostsType>
-    dialogues: Array<ChatType>
-    messages: Array<MessagesType>
-}
-export type PostsType = {
-    id: number
-    message: string
-    likesCount: number
-}
-export type ChatType = {
-    id: number
-    name: string
-}
-export type MessagesType = {
-    id: number
-    message: string
+    state: RootStateType
+    addPost: (postMessage: string) => void
 }
 
 function App(props: AppType) {
@@ -40,7 +24,7 @@ function App(props: AppType) {
                 <div className='app-wrapper-content'>
                     <Routes>
                         <Route path={'/profile'} element={
-                            <Profile posts={props.state.posts}
+                            <Profile posts={props.state.posts} addPost={props.addPost}
                             />
                         }
                         />

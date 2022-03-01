@@ -1,3 +1,22 @@
+export type MessagesType = {
+    id: number
+    message: string
+}
+export type DialoguesType = {
+    id: number
+    name: string
+}
+export type PostsType = {
+    id: number
+    message: string
+    likesCount: number
+}
+export type RootStateType = {
+    posts: PostsType[]
+    dialogues: DialoguesType[]
+    messages: MessagesType[]
+}
+
 let state = {
     posts: [
         {id: 1, message: "Hi, how are you?", likesCount: 34},
@@ -18,7 +37,14 @@ let state = {
         {id: 2, message: 'How is it goin?'},
         {id: 3, message: 'Awesome!'}
     ]
-
 }
 
+export let addPost = (postMessage: string) => {
+    const newPost = {
+        id: 5,
+        message: postMessage,
+        likesCount: 0
+    }
+    state.posts.push(newPost)
+}
 export default state;

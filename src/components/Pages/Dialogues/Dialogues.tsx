@@ -2,14 +2,14 @@ import React from 'react';
 import s from './Dialogues.module.css'
 import DialogueItem from "./DialogueItem/DialogueItem";
 import Message from "./Message/Message";
-import {ChatType, MessagesType} from "../../../App";
+import {DialoguesType, MessagesType,} from "../../../redux/state";
 
-type DialoguesType = {
-    dialogues: Array<ChatType>
+type DialoguesPropsType = {
+    dialogues: Array<DialoguesType>
     messages: Array<MessagesType>
 }
 
-const Dialogues = (props: DialoguesType) => {
+const Dialogues = (props: DialoguesPropsType) => {
     let dialoguesElements = props.dialogues.map (d => <DialogueItem name={d.name} id={d.id} />);
 
     let messagesElements = props.messages.map (m => <Message message={m.message}/>);
