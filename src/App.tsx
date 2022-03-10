@@ -8,15 +8,14 @@ import {Route, Routes} from 'react-router-dom';
 import Music from "./components/Pages/Music/Music";
 import News from "./components/Pages/News/News";
 import Settings from "./components/Pages/Settings/Settings";
-import {RootStateType} from "./redux/state";
+import store, {StoreType} from "./redux/state";
 
 export type AppType = {
-    state: RootStateType
-    addPost: (postMessage: string) => void
-    changeText: (newText: string) => void
+    store: StoreType
 }
 
 function App(props: AppType) {
+    const state = props.store.getState();
     return (
             <div className='app-wrapper'>
                 <Header/>
@@ -25,24 +24,21 @@ function App(props: AppType) {
                     <Routes>
                         <Route path={'/profile'} element={
                             <Profile
-                                message={props.state.newMessageText}
-                                posts={props.state.posts}
-                                addPost={props.addPost}
-                                changeTextCallback={props.changeText}
+                                store={store}
                             />
                         }
                         />
                         <Route path={'/dialogues'} element={
                                 <Dialogues
-                                    dialogues={props.state.dialogues}
-                                    messages={props.state.messages}
+                                    dialogues={state.dialogues}
+                                    messages={state.messages}
                                 />
                             }
                         >
                         <Route path={':id'} element={
                             <Dialogues
-                                dialogues={props.state.dialogues}
-                                messages={props.state.messages}
+                                dialogues={state.dialogues}
+                                messages={state.messages}
                             />
                         }/>
                         </Route>

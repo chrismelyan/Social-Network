@@ -1,24 +1,22 @@
 import React from 'react';
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {PostsType} from "../../redux/state";
+import {StoreType} from "../../redux/state";
 
 type ProfileType = {
-    posts: Array<PostsType>
-    addPost: (postMessage: string) => void
-    message: string
-    changeTextCallback: (title: string) => void
+    store: StoreType
 }
 
 const Profile = (props: ProfileType) => {
+    const state = props.store.getState();
     return (
         <div>
             <ProfileInfo/>
             <MyPosts
-                message={props.message}
-                posts={props.posts}
-                addPost={props.addPost}
-                changeTextCallback={props.changeTextCallback}/>
+                newMessageText={state.newMessageText}
+                posts={state.posts}
+                dispatch={props.store.dispatch.bind(props.store)}
+            />
         </div>
     )
 }

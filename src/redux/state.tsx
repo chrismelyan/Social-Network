@@ -15,11 +15,21 @@ export type PostsType = {
 }
 export type RootStateType = {
     posts: PostsType[]
+    newMessageText: string
     dialogues: DialoguesType[]
     messages: MessagesType[]
-    newMessageText: string
 }
-export let store = {
+
+export type StoreType = {
+    _state: RootStateType
+    getState: () => RootStateType
+    addPost: (postMessage: string) => void
+    changeText: (newText: string) => void
+    dispatch: (action: ActionsTypes) => void
+}
+export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof changeTextAC>
+
+const store: StoreType = {
     _state: {
         posts: [
             {id: 1, message: "Hi, how are you?", likesCount: 34},
@@ -42,10 +52,10 @@ export let store = {
             {id: 3, message: 'Awesome!'}
         ]
     },
-    getState () {
+    getState() {
         return this._state
     },
-    addPost (postMessage: string) {
+    addPost(postMessage: string) {
         const newPost = {
             id: 5,
             message: postMessage,
@@ -53,11 +63,41 @@ export let store = {
         }
         this._state.posts.push(newPost)
         this._state.newMessageText = ''
-        rerenderEntireTree(this._state)
+        rerenderEntireTree(store)
     },
-    changeText (newText: string) {
+    changeText(newText: string) {
         this._state.newMessageText = newText
-        rerenderEntireTree(this._state)
+        rerenderEntireTree(store)
+    },
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            const newPost = {
+                id: 5,
+                message: action.postMessage,
+                likesCount: 0
+            }
+            this._state.posts.push(newPost)
+            this._state.newMessageText = ''
+            rerenderEntireTree(store)
+        } else if (action.type === 'CHANGE-TEXT') {
+            this._state.newMessageText = action.newText
+            rerenderEntireTree(store)
+        }
     }
 }
+
+export const addPostAC = (postMessage: string) => {
+    return {
+        type: 'ADD-POST',
+        postMessage: postMessage
+    } as const
+}
+
+export const changeTextAC = (newText: string) => {
+    return {
+        type: 'CHANGE-TEXT',
+        newText: newText
+    } as const
+}
+
 export default store;

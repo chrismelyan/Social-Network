@@ -1,20 +1,23 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {PostsType} from "../../../redux/state";
+import {ActionsTypes, addPostAC, changeTextAC, PostsType} from "../../../redux/state";
 
 type MyPostsType = {
     posts: Array<PostsType>
-    addPost: (postMessage: string) => void
-    message: string
-    changeTextCallback: (title: string) => void
+    newMessageText: string
+    dispatch: (action: ActionsTypes) => void
 }
 
 const MyPosts = (props: MyPostsType) => {
     let postElement = props.posts.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount} />);
 
+    let onChangeText = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.dispatch(changeTextAC(e.currentTarget.value))
+    }
+
     let addPost = () => {
-        props.addPost(props.message)
+        props.dispatch(addPostAC(props.newMessageText))
         // newPostElement.current.value = ''
     }
 
@@ -24,8 +27,8 @@ const MyPosts = (props: MyPostsType) => {
             <div>
                 <div>
                     <textarea
-                        value={props.message}
-                        onChange={(e) => props.changeTextCallback(e.currentTarget.value)}/>
+                        value={props.newMessageText}
+                        onChange={onChangeText}/>
                 </div>
                 <div>
                     <button onClick={addPost}>Add post</button>
