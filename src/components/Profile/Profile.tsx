@@ -13,8 +13,8 @@ const Profile = (props: ProfileType) => {
         <div>
             <ProfileInfo/>
             <MyPosts
-                newMessageText={state.newMessageText}
-                posts={state.posts}
+                newMessageText={state.profilePage.newMessageText}
+                posts={state.profilePage.posts}
                 dispatch={props.store.dispatch.bind(props.store)}
             />
         </div>

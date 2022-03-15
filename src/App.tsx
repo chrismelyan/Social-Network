@@ -8,14 +8,10 @@ import {Route, Routes} from 'react-router-dom';
 import Music from "./components/Pages/Music/Music";
 import News from "./components/Pages/News/News";
 import Settings from "./components/Pages/Settings/Settings";
-import store, {StoreType} from "./redux/state";
+import store from "./redux/state";
 
-export type AppType = {
-    store: StoreType
-}
 
-function App(props: AppType) {
-    const state = props.store.getState();
+function App() {
     return (
             <div className='app-wrapper'>
                 <Header/>
@@ -30,15 +26,13 @@ function App(props: AppType) {
                         />
                         <Route path={'/dialogues'} element={
                                 <Dialogues
-                                    dialogues={state.dialogues}
-                                    messages={state.messages}
+                                    store={store}
                                 />
                             }
                         >
                         <Route path={':id'} element={
                             <Dialogues
-                                dialogues={state.dialogues}
-                                messages={state.messages}
+                                store={store}
                             />
                         }/>
                         </Route>
