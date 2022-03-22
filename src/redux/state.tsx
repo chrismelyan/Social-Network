@@ -1,9 +1,6 @@
 import {rerenderEntireTree} from "../index";
-
-const ADD_POST = 'ADD-POST';
-const CHANGE_TEXT = 'CHANGE-TEXT';
-const UPDATE_DIALOGUES_TEXT = 'UPDATE-DIALOGUES-TEXT';
-const SEND_MESSAGE = 'SEND-MESSAGE';
+import profileReducer, {addPostAC, changeTextAC} from "./profile-reducer";
+import dialoguesReducer, {sendMessageAC, updateDialoguesTextAC} from "./dialogues-reducer";
 
 export type MessagesType = {
     id: number
@@ -93,55 +90,12 @@ const store: StoreType = {
         rerenderEntireTree(store)
     },
     dispatch(action) {
-        if (action.type === ADD_POST) {
-            const newPost = {
-                id: 5,
-                message: action.postMessage,
-                likesCount: 0
-            }
-            this._state.profilePage.posts.push(newPost)
-            this._state.profilePage.newMessageText = '';
-            rerenderEntireTree(store);
-        } else if (action.type === CHANGE_TEXT) {
-            this._state.profilePage.newMessageText = action.newText;
-            rerenderEntireTree(store);
-        } else if (action.type === UPDATE_DIALOGUES_TEXT) {
-            this._state.dialoguesPage.newDialogueText = action.body;
-            rerenderEntireTree(store);
-        } else if (action.type === SEND_MESSAGE) {
-            let body = this._state.dialoguesPage.newDialogueText;
-            this._state.dialoguesPage.newDialogueText = '';
-            this._state.dialoguesPage.messages.push({id: 4, message: body});
-            rerenderEntireTree(store);
-        }
+
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.dialoguesPage = dialoguesReducer(this._state.dialoguesPage, action);
+
+        rerenderEntireTree(store);
     }
-}
-
-export const addPostAC = (postMessage: string) => {
-    return {
-        type: ADD_POST,
-        postMessage: postMessage
-    } as const
-}
-
-export const changeTextAC = (newText: string) => {
-    return {
-        type: CHANGE_TEXT,
-        newText: newText
-    } as const
-}
-
-export const updateDialoguesTextAC = (body: string) => {
-    return {
-        type: UPDATE_DIALOGUES_TEXT,
-        body: body
-    } as const
-}
-
-export const sendMessageAC = () => {
-    return {
-        type: SEND_MESSAGE
-    } as const
 }
 
 export default store;

@@ -11,9 +11,7 @@ export let rerenderEntireTree = (store: StoreType) => {
     ReactDOM.render(
         <React.StrictMode>
             <BrowserRouter>
-                <App
-                    store={store}
-                />
+                <App />
             </BrowserRouter>
         </React.StrictMode>,
         document.getElementById('root')
