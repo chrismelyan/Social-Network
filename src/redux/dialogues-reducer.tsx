@@ -3,7 +3,24 @@ import {ActionsTypes, DialoguesPageType} from "./state";
 export const UPDATE_DIALOGUES_TEXT = 'UPDATE-DIALOGUES-TEXT';
 export const SEND_MESSAGE = 'SEND-MESSAGE';
 
-const dialoguesReducer = (state: DialoguesPageType, action: ActionsTypes) => {
+const initialDialogues: DialoguesPageType = {
+    dialogues: [
+        {id: 1, name: 'Chris'},
+        {id: 2, name: 'Kristen'},
+        {id: 3, name: 'Victor'},
+        {id: 4, name: 'Mary'},
+        {id: 5, name: 'Zac'},
+        {id: 6, name: 'Carey'}
+    ],
+    messages: [
+        {id: 1, message: 'Hi'},
+        {id: 2, message: 'How is it goin?'},
+        {id: 3, message: 'Awesome!'}
+    ],
+    newDialogueText: ''
+}
+
+const dialoguesReducer = (state = initialDialogues, action: ActionsTypes) => {
     switch(action.type) {
         case UPDATE_DIALOGUES_TEXT:
             state.newDialogueText = action.body;

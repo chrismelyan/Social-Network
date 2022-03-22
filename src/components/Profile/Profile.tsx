@@ -1,10 +1,10 @@
 import React from 'react';
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {StoreType} from "../../redux/state";
+import {ReduxStoreType} from "../../redux/reduxStore";
 
 type ProfileType = {
-    store: StoreType
+    store: ReduxStoreType
 }
 
 const Profile = (props: ProfileType) => {

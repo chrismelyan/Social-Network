@@ -8,10 +8,12 @@ import {Route, Routes} from 'react-router-dom';
 import Music from "./components/Pages/Music/Music";
 import News from "./components/Pages/News/News";
 import Settings from "./components/Pages/Settings/Settings";
-import store from "./redux/state";
+import {ReduxStoreType} from "./redux/reduxStore";
 
-
-function App() {
+type AppType = {
+    store: ReduxStoreType
+}
+function App(props: AppType) {
     return (
             <div className='app-wrapper'>
                 <Header/>
@@ -20,19 +22,19 @@ function App() {
                     <Routes>
                         <Route path={'/profile'} element={
                             <Profile
-                                store={store}
+                                store={props.store}
                             />
                         }
                         />
                         <Route path={'/dialogues'} element={
                                 <Dialogues
-                                    store={store}
+                                    store={props.store}
                                 />
                             }
                         >
                         <Route path={':id'} element={
                             <Dialogues
-                                store={store}
+                                store={props.store}
                             />
                         }/>
                         </Route>

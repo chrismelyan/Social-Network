@@ -1,4 +1,4 @@
-import {rerenderEntireTree} from "../index";
+// import {rerenderEntireTree} from "../index";
 import profileReducer, {addPostAC, changeTextAC} from "./profile-reducer";
 import dialoguesReducer, {sendMessageAC, updateDialoguesTextAC} from "./dialogues-reducer";
 
@@ -83,18 +83,18 @@ const store: StoreType = {
         }
         this._state.profilePage.posts.push(newPost)
         this._state.profilePage.newMessageText = ''
-        rerenderEntireTree(store)
+        // rerenderEntireTree(store)
     },
     changeText(newText: string) {
         this._state.profilePage.newMessageText = newText
-        rerenderEntireTree(store)
+        // rerenderEntireTree(store)
     },
     dispatch(action) {
 
         this._state.profilePage = profileReducer(this._state.profilePage, action);
         this._state.dialoguesPage = dialoguesReducer(this._state.dialoguesPage, action);
 
-        rerenderEntireTree(store);
+        // rerenderEntireTree(store);
     }
 }
 
