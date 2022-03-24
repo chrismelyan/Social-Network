@@ -10,10 +10,13 @@ import News from "./components/Pages/News/News";
 import Settings from "./components/Pages/Settings/Settings";
 import {ReduxStoreType} from "./redux/reduxStore";
 
+
 type AppType = {
     store: ReduxStoreType
 }
 function App(props: AppType) {
+    const state = props.store.getState()
+
     return (
             <div className='app-wrapper'>
                 <Header/>
@@ -22,18 +25,21 @@ function App(props: AppType) {
                     <Routes>
                         <Route path={'/profile'} element={
                             <Profile
+                                profilePage={state.profilePage}
                                 store={props.store}
                             />
                         }
                         />
                         <Route path={'/dialogues'} element={
                                 <Dialogues
+                                    dialoguesPage={state.dialoguesPage}
                                     store={props.store}
                                 />
                             }
                         >
                         <Route path={':id'} element={
                             <Dialogues
+                                dialoguesPage={state.dialoguesPage}
                                 store={props.store}
                             />
                         }/>

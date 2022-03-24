@@ -3,7 +3,7 @@ import {ActionsTypes, ProfilePageType} from "./state";
 export const ADD_POST = 'ADD-POST';
 export const CHANGE_TEXT = 'CHANGE-TEXT';
 
-const initialProfile = {
+const initialProfile: ProfilePageType = {
     posts: [
         {id: 1, message: "Hi, how are you?", likesCount: 34},
         {id: 2, message: "Need more time!!", likesCount: 135},
@@ -13,7 +13,7 @@ const initialProfile = {
     newMessageText: ''
 }
 
-const profileReducer = (state: ProfilePageType = initialProfile, action: ActionsTypes) => {
+const profileReducer = (state: ProfilePageType = initialProfile, action: ActionsTypes): ProfilePageType => {
     switch (action.type) {
         case ADD_POST:
             const newPost = {

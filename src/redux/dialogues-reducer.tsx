@@ -20,7 +20,7 @@ const initialDialogues: DialoguesPageType = {
     newDialogueText: ''
 }
 
-const dialoguesReducer = (state = initialDialogues, action: ActionsTypes) => {
+const dialoguesReducer = (state = initialDialogues, action: ActionsTypes): DialoguesPageType => {
     switch(action.type) {
         case UPDATE_DIALOGUES_TEXT:
             state.newDialogueText = action.body;

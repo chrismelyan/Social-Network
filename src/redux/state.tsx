@@ -93,7 +93,6 @@ const store: StoreType = {
 
         this._state.profilePage = profileReducer(this._state.profilePage, action);
         this._state.dialoguesPage = dialoguesReducer(this._state.dialoguesPage, action);
-
         // rerenderEntireTree(store);
     }
 }
