@@ -36,20 +36,18 @@ const initialDialogues: DialoguesPageType = {
 
 const dialoguesReducer = (state = initialDialogues, action: ActionsTypes): DialoguesPageType => {
     switch(action.type) {
-        case UPDATE_DIALOGUES_TEXT: {
-            let stateCopy = {...state};
-
-            stateCopy.newDialogueText = action.body;
-            return stateCopy;
-        }
-        case SEND_MESSAGE: {
-            let stateCopy = {...state};
-
+        case UPDATE_DIALOGUES_TEXT:
+            return {
+                ...state,
+                newDialogueText: action.body
+            };
+        case SEND_MESSAGE:
             let body = state.newDialogueText;
-            stateCopy.newDialogueText = '';
-            stateCopy.messages.push({id: 4, message: body});
-            return stateCopy;
-        }
+            return {
+                ...state,
+                newDialogueText: '',
+                messages: [...state.messages, {id: 4, message: body}]
+            };
         default:
             return state;
     }
