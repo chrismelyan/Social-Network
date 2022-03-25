@@ -2,37 +2,37 @@
 import profileReducer, {addPostAC, changeTextAC} from "./profile-reducer";
 import dialoguesReducer, {sendMessageAC, updateDialoguesTextAC} from "./dialogues-reducer";
 
-export type MessagesType = {
+type MessagesType = {
     id: number
     message: string
 }
-export type DialoguesType = {
+type DialoguesType = {
     id: number
     name: string
 }
-export type PostsType = {
+type PostsType = {
     id: number
     message: string
     likesCount: number
 }
 
-export type ProfilePageType = {
+type ProfilePageType = {
     posts: PostsType[]
     newMessageText: string
 }
 
-export type DialoguesPageType = {
+type DialoguesPageType = {
     dialogues: DialoguesType[]
     messages: MessagesType[]
     newDialogueText: string
 }
 
-export type RootStateType = {
+type RootStateType = {
     profilePage: ProfilePageType
     dialoguesPage: DialoguesPageType
 }
 
-export type StoreType = {
+type StoreType = {
     _state: RootStateType
     getState: () => RootStateType
     addPost: (postMessage: string) => void

@@ -1,7 +1,17 @@
-import {ActionsTypes, ProfilePageType} from "./state";
+import {ActionsTypes} from "./state";
 
 export const ADD_POST = 'ADD-POST';
 export const CHANGE_TEXT = 'CHANGE-TEXT';
+
+export type ProfilePageType = {
+    posts: PostsType[]
+    newMessageText: string
+}
+export type PostsType = {
+    id: number
+    message: string
+    likesCount: number
+}
 
 const initialProfile: ProfilePageType = {
     posts: [
@@ -15,18 +25,26 @@ const initialProfile: ProfilePageType = {
 
 const profileReducer = (state: ProfilePageType = initialProfile, action: ActionsTypes): ProfilePageType => {
     switch (action.type) {
-        case ADD_POST:
+        case ADD_POST: {
             const newPost = {
                 id: 5,
                 message: action.postMessage,
                 likesCount: 0
             }
-            state.posts.push(newPost)
-            state.newMessageText = '';
-            return state;
-        case CHANGE_TEXT:
-            state.newMessageText = action.newText;
-            return state;
+            let stateCopy = {...state};
+            stateCopy.posts = [...state.posts]
+
+            stateCopy.posts.push(newPost);
+            stateCopy.newMessageText = '';
+            return stateCopy;
+        }
+        case CHANGE_TEXT: {
+            let stateCopy = {...state};
+            stateCopy.posts = [...state.posts]
+
+            stateCopy.newMessageText = action.newText;
+            return stateCopy;
+        }
         default:
             return state;
     }

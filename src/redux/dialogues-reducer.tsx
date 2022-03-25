@@ -1,7 +1,21 @@
-import {ActionsTypes, DialoguesPageType} from "./state";
+import {ActionsTypes} from "./state";
 
 export const UPDATE_DIALOGUES_TEXT = 'UPDATE-DIALOGUES-TEXT';
 export const SEND_MESSAGE = 'SEND-MESSAGE';
+
+export type DialoguesPageType = {
+    dialogues: DialoguesType[]
+    messages: MessagesType[]
+    newDialogueText: string
+}
+export type MessagesType = {
+    id: number
+    message: string
+}
+export type DialoguesType = {
+    id: number
+    name: string
+}
 
 const initialDialogues: DialoguesPageType = {
     dialogues: [
@@ -22,14 +36,20 @@ const initialDialogues: DialoguesPageType = {
 
 const dialoguesReducer = (state = initialDialogues, action: ActionsTypes): DialoguesPageType => {
     switch(action.type) {
-        case UPDATE_DIALOGUES_TEXT:
-            state.newDialogueText = action.body;
-            return state;
-        case SEND_MESSAGE:
+        case UPDATE_DIALOGUES_TEXT: {
+            let stateCopy = {...state};
+
+            stateCopy.newDialogueText = action.body;
+            return stateCopy;
+        }
+        case SEND_MESSAGE: {
+            let stateCopy = {...state};
+
             let body = state.newDialogueText;
-            state.newDialogueText = '';
-            state.messages.push({id: 4, message: body});
-            return state;
+            stateCopy.newDialogueText = '';
+            stateCopy.messages.push({id: 4, message: body});
+            return stateCopy;
+        }
         default:
             return state;
     }

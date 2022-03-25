@@ -2,7 +2,7 @@ import React, {ChangeEvent} from 'react';
 import s from './Dialogues.module.css'
 import DialogueItem from "./DialogueItem/DialogueItem";
 import Message from "./Message/Message";
-import {DialoguesPageType} from "../../../redux/state";
+import {DialoguesPageType} from "../../../redux/dialogues-reducer";
 
 type DialoguesPropsType = {
     dialoguesPage: DialoguesPageType
@@ -13,8 +13,8 @@ type DialoguesPropsType = {
 
 const Dialogues = (props: DialoguesPropsType) => {
 
-    let dialoguesElements = props.dialoguesPage.dialogues.map(d => <DialogueItem name={d.name} id={d.id}/>);
-    let messagesElements = props.dialoguesPage.messages.map(m => <Message message={m.message}/>);
+    let dialoguesElements = props.dialoguesPage.dialogues.map(d => <DialogueItem key={d.id} name={d.name} id={d.id}/>);
+    let messagesElements = props.dialoguesPage.messages.map(m => <Message key={m.id} message={m.message}/>);
 
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.updateDialoguesText(e.currentTarget.value)
