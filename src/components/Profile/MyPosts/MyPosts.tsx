@@ -1,24 +1,25 @@
 import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {addPostAC, changeTextAC} from "../../../redux/profile-reducer";
-import {ActionsTypes, PostsType} from "../../../redux/state";
+import {PostsType} from "../../../redux/state";
 
 type MyPostsType = {
     posts: Array<PostsType>
-    newMessageText: string
-    dispatch: (action: ActionsTypes) => void
+    value: string
+    onAddPost: (value: string) => void
+    onChangeText: (text: string) => void
 }
 
 const MyPosts = (props: MyPostsType) => {
+
     let postElement = props.posts.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount} />);
 
     let onChangeText = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(changeTextAC(e.currentTarget.value))
+        props.onChangeText(e.currentTarget.value)
     }
 
     let addPost = () => {
-        props.dispatch(addPostAC(props.newMessageText))
+        props.onAddPost(props.value)
         // newPostElement.current.value = ''
     }
 
@@ -28,7 +29,7 @@ const MyPosts = (props: MyPostsType) => {
             <div>
                 <div>
                     <textarea
-                        value={props.newMessageText}
+                        value={props.value}
                         onChange={onChangeText}/>
                 </div>
                 <div>
