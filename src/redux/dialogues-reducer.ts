@@ -1,5 +1,3 @@
-import {ActionsTypes} from "./state";
-
 export const UPDATE_DIALOGUES_TEXT = 'UPDATE-DIALOGUES-TEXT';
 export const SEND_MESSAGE = 'SEND-MESSAGE';
 
@@ -34,7 +32,8 @@ const initialDialogues: DialoguesPageType = {
     newDialogueText: ''
 }
 
-const dialoguesReducer = (state = initialDialogues, action: ActionsTypes): DialoguesPageType => {
+const dialoguesReducer = (state = initialDialogues,
+                          action: DialoguesReducerActionType): DialoguesPageType => {
     switch(action.type) {
         case UPDATE_DIALOGUES_TEXT:
             return {
@@ -53,18 +52,18 @@ const dialoguesReducer = (state = initialDialogues, action: ActionsTypes): Dialo
     }
 }
 
+export type DialoguesReducerActionType = ReturnType<typeof updateDialoguesTextAC> | ReturnType<typeof sendMessageAC>;
+
 export const updateDialoguesTextAC = (body: string) => {
     return {
         type: UPDATE_DIALOGUES_TEXT,
         body: body
     } as const
 }
-
 export const sendMessageAC = () => {
     return {
         type: SEND_MESSAGE
     } as const
 }
-
 
 export default dialoguesReducer;

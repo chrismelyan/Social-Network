@@ -1,0 +1,33 @@
+.user {
+    display: flex;
+    margin: 10px 20px;
+}
+
+.avatar {
+    display: flex;
+    flex-direction: column;
+}
+
+.avatar img {
+    width: 100px;
+    border-radius: 50%;
+    margin-bottom: 5px;
+}
+
+.userBlock {
+    border: 1px solid midnightblue;
+    border-radius: 10px;
+    width: 500px;
+    padding: 10px;
+    display: flex;
+    margin-left: 20px;
+}
+
+.nameStatus {
+    text-align: left;
+    margin-right: 300px;
+}
+
+.location {
+    text-align: right;
+}

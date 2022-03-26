@@ -1,5 +1,3 @@
-import {ActionsTypes} from "./state";
-
 export const ADD_POST = 'ADD-POST';
 export const CHANGE_TEXT = 'CHANGE-TEXT';
 
@@ -23,7 +21,7 @@ const initialProfile: ProfilePageType = {
     newMessageText: ''
 }
 
-const profileReducer = (state: ProfilePageType = initialProfile, action: ActionsTypes): ProfilePageType => {
+const profileReducer = (state: ProfilePageType = initialProfile, action: ProfileReducerActionType): ProfilePageType => {
     switch (action.type) {
         case ADD_POST:
             const newPost = {
@@ -46,13 +44,14 @@ const profileReducer = (state: ProfilePageType = initialProfile, action: Actions
     }
 }
 
+export type ProfileReducerActionType = ReturnType<typeof addPostAC> | ReturnType<typeof changeTextAC>
+
 export const addPostAC = (postMessage: string) => {
     return {
         type: ADD_POST,
         postMessage: postMessage
     } as const
 }
-
 export const changeTextAC = (newText: string) => {
     return {
         type: CHANGE_TEXT,

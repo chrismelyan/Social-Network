@@ -1,6 +1,6 @@
 // import {rerenderEntireTree} from "../index";
-import profileReducer, {addPostAC, changeTextAC} from "./profile-reducer";
-import dialoguesReducer, {sendMessageAC, updateDialoguesTextAC} from "./dialogues-reducer";
+import profileReducer from "./profile-reducer";
+import dialoguesReducer from "./dialogues-reducer";
 
 type MessagesType = {
     id: number
@@ -37,12 +37,8 @@ type StoreType = {
     getState: () => RootStateType
     addPost: (postMessage: string) => void
     changeText: (newText: string) => void
-    dispatch: (action: ActionsTypes) => void
+    dispatch: (action: any) => void
 }
-export type ActionsTypes = ReturnType<typeof addPostAC>
-    | ReturnType<typeof changeTextAC>
-    | ReturnType<typeof updateDialoguesTextAC>
-    | ReturnType<typeof sendMessageAC>
 
 const store: StoreType = {
     _state: {
