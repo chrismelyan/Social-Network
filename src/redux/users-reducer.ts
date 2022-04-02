@@ -8,78 +8,30 @@ export type UsersStateType = {
 
 export type UserType = {
     id: number
-    photoUrl: string
+    photos: { small: string, large: string }
     followed: boolean
-    fullName: string
+    name: string
+    uniqueUrlName: string
     status: string
-    location: LocationType
+    // location: LocationType
 }
 
-type LocationType = {
-    city: string
-    country: string
-}
+// type LocationType = {
+//     city: string
+//     country: string
+// }
 
 const initialUsers: UsersStateType = {
-    users: [
-        {
-            id: 1,
-            photoUrl: 'https://www.theplace2.ru/cache/archive//img/square-gthumb-gwdata1200-ghdata1200-gfitdatamax.jpg',
-            followed: false,
-            fullName: 'Christina',
-            status: 'JS is tough!',
-            location:
-                {
-                    city: 'Brest',
-                    country: 'Belarus'
-                }
-        },
-        {
-            id: 2,
-            photoUrl: 'https://www.theplace2.ru/cache/archive//img/square-gthumb-gwdata1200-ghdata1200-gfitdatamax.jpg',
-            followed: true,
-            fullName: 'Tom',
-            status: 'On my way to Brazil',
-            location:
-                {
-                    city: 'London',
-                    country: 'UK'
-                }
-        },
-        {
-            id: 3,
-            photoUrl: 'https://www.theplace2.ru/cache/archive//img/square-gthumb-gwdata1200-ghdata1200-gfitdatamax.jpg',
-            followed: false,
-            fullName: 'David',
-            status: 'Watching memes',
-            location:
-                {
-                    city: 'Warsaw',
-                    country: 'Poland'
-                }
-        },
-        {
-            id: 4,
-            photoUrl: 'https://www.theplace2.ru/cache/archive//img/square-gthumb-gwdata1200-ghdata1200-gfitdatamax.jpg',
-            followed: true,
-            fullName: 'Mary',
-            status: 'Great day!',
-            location:
-                {
-                    city: 'Kyev',
-                    country: 'Ukraine'
-                }
-        }
-    ]
+    users: []
 }
 
 const usersReducer = (state: UsersStateType = initialUsers, action: UsersReducerActionType): UsersStateType => {
     switch (action.type) {
         case FOLLOW:
-            return {
+            return ({
                 ...state,
                 users: state.users.map(el => el.id === action.userID ? {...el, followed: true} : el)
-            };
+            })
         case UNFOLLOW:
             return {
                 ...state,
