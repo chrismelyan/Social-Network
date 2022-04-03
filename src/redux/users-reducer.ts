@@ -8,12 +8,18 @@ export type UsersStateType = {
 
 export type UserType = {
     id: number
-    photos: { small: string, large: string }
+    photos: { small: null | string, large: null | string }
     followed: boolean
     name: string
-    uniqueUrlName: string
-    status: string
+    uniqueUrlName: null | string
+    status: null | string
     // location: LocationType
+}
+
+export type UsersResponseType = {
+    items: UserType
+    totalCount: number
+    error: null | string
 }
 
 // type LocationType = {
