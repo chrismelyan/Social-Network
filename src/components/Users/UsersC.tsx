@@ -1,9 +1,9 @@
 import React from 'react';
 import s from './Users.module.css'
-import * as axios from "axios";
+import axios, {AxiosResponse} from 'axios';
 import userPhoto from '../../assets/images/user.png'
 import {UsersResponseType, UserType} from "../../redux/users-reducer";
-import {AxiosResponse} from "axios";
+
 
 export type UsersCType = {
     users: UserType[]
@@ -13,7 +13,7 @@ export type UsersCType = {
 }
 
 class Users extends React.Component<UsersCType, UsersResponseType> {
-    getUsers = () => {
+    getUsers () {
         if (this.props.users.length === 0) {
             axios.get('https://social-network.samuraijs.com/api/1.0/users').then((response: AxiosResponse<UsersResponseType>) => {
                 this.props.setUsers(response.data.items);
@@ -46,8 +46,8 @@ class Users extends React.Component<UsersCType, UsersResponseType> {
                             <div>{el.status}</div>
                         </span>
                             <span className={s.location}>
-                            <div>{'el.location.country'}</div>
-                            <div>{'el.location.city'}</div>
+                            {/*<div>{'el.location.country'}</div>*/}
+                            {/*<div>{'el.location.city'}</div>*/}
                         </span>
                         </div>
                     </div>)

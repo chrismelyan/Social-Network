@@ -59,6 +59,6 @@ export type UsersReducerActionType = ReturnType<typeof followAC>
 export const followAC = (userID: number) => ({type: FOLLOW, userID} as const);
 
 export const unfollowAC = (id: number) => ({type: UNFOLLOW, userID: id} as const);
-export const setUsersAC = (user: UsersStateType) => ({type: SET_USERS, newUser: user} as const);
+export const setUsersAC = (user: UserType) => ({type: SET_USERS, newUser: user} as const);
 
 export default usersReducer;
