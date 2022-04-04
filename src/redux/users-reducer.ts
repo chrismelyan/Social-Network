@@ -2,7 +2,7 @@ export const FOLLOW = 'FOLLOW';
 export const UNFOLLOW = 'UNFOLLOW';
 export const SET_USERS = 'SET_USERS';
 
-export type UsersStateType = {
+export type UsersReducerStateType = {
     users: UserType[]
 }
 
@@ -17,7 +17,7 @@ export type UserType = {
 }
 
 export type UsersResponseType = {
-    items: UserType
+    items: UserType[]
     totalCount: number
     error: null | string
 }
@@ -27,11 +27,11 @@ export type UsersResponseType = {
 //     country: string
 // }
 
-const initialUsers: UsersStateType = {
+const initialUsers: UsersReducerStateType = {
     users: []
 }
 
-const usersReducer = (state: UsersStateType = initialUsers, action: UsersReducerActionType): UsersStateType => {
+const usersReducer = (state: UsersReducerStateType = initialUsers, action: UsersReducerActionType): UsersReducerStateType => {
     switch (action.type) {
         case FOLLOW:
             return ({
@@ -46,7 +46,7 @@ const usersReducer = (state: UsersStateType = initialUsers, action: UsersReducer
         case SET_USERS:
             return {
                 ...state,
-                users: {...state.users, ...action.newUser}
+                users: [...action.users]
             }
         default:
             return state;
@@ -59,6 +59,6 @@ export type UsersReducerActionType = ReturnType<typeof followAC>
 export const followAC = (userID: number) => ({type: FOLLOW, userID} as const);
 
 export const unfollowAC = (id: number) => ({type: UNFOLLOW, userID: id} as const);
-export const setUsersAC = (user: UserType) => ({type: SET_USERS, newUser: user} as const);
+export const setUsersAC = (users: Array<UserType>) => ({type: SET_USERS, users} as const);
 
 export default usersReducer;

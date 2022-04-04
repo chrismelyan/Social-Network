@@ -9,11 +9,16 @@ export type UsersCType = {
     users: UserType[]
     follow: (id: number) => void
     unfollow: (id: number) => void
-    setUsers: (i: UserType) => void
+    setUsers: (users: UserType[]) => void
 }
 
 class Users extends React.Component<UsersCType, UsersResponseType> {
-    getUsers () {
+
+    // constructor(props: UsersCType) {
+    //     super(props)
+    // }
+
+    componentDidMount() {
         if (this.props.users.length === 0) {
             axios.get('https://social-network.samuraijs.com/api/1.0/users').then((response: AxiosResponse<UsersResponseType>) => {
                 this.props.setUsers(response.data.items);
@@ -24,7 +29,7 @@ class Users extends React.Component<UsersCType, UsersResponseType> {
     render() {
         return (
             <div>
-                <button onClick={this.getUsers}>Get Users</button>
+                {/*<button onClick={this.getUsers}>Get Users</button>*/}
                 {
                     this.props.users.map(el => <div key={el.id} className={s.user}>
                         <div className={s.avatar}>
@@ -46,8 +51,8 @@ class Users extends React.Component<UsersCType, UsersResponseType> {
                             <div>{el.status}</div>
                         </span>
                             <span className={s.location}>
-                            {/*<div>{'el.location.country'}</div>*/}
-                            {/*<div>{'el.location.city'}</div>*/}
+                            <div>{'el.location.country'}</div>
+                            <div>{'el.location.city'}</div>
                         </span>
                         </div>
                     </div>)
