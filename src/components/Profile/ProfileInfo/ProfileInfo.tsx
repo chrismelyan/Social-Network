@@ -10,12 +10,12 @@ const ProfileInfo = (props: ProfileInfoType) => {
     return (
         <div>
             <div>
-                <img
-                    src='https://image.shutterstock.com/image-photo/cattle-ranch-below-dallas-divide-260nw-1016018500.jpg'/>
+                <img src='https://image.shutterstock.com/image-photo/cattle-ranch-below-dallas-divide-260nw-1016018500.jpg' alt={'background'}/>
             </div>
+            <h1>{props.profile?.fullName}</h1>
             <div className={s.descriptionBlock}>
-                <img src={props.profile?.photos.large}/>
-                ava + discription
+                <img src={props.profile?.photos.large} alt={'profile'}/>
+                <div>About me: {props.profile?.aboutMe}</div>
             </div>
         </div>
     );
