@@ -20,7 +20,7 @@ function App() {
             <div className='app-wrapper-content'>
                 <Routes>
                     <Route path={'/profile'} element={<ProfileContainer/>}>
-                        <Route path={':id'} element={<ProfileContainer/>}
+                        <Route path={':userId'} element={<ProfileContainer/>}
                         />
                     </Route>
                     <Route path={'/dialogues'} element={<DialoguesContainer/>}>

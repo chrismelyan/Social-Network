@@ -46,7 +46,7 @@ const initialProfile: ProfilePageType = {
     profile: null
 }
 
-const profileReducer = (state: ProfilePageType = initialProfile, action: ProfileReducerActionType): ProfilePageType => {
+const  profileReducer = (state: ProfilePageType = initialProfile, action: ProfileReducerActionType): ProfilePageType => {
     switch (action.type) {
         case ADD_POST:
             const newPost = {
