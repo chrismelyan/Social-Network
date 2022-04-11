@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
-import Profile from "./components/Profile/Profile";
+import ProfileContainer from "./components/Profile/ProfileContainer";
 import {Route, Routes} from 'react-router-dom';
 import Music from "./components/Pages/Music/Music";
 import News from "./components/Pages/News/News";
@@ -14,23 +14,26 @@ import {UsersContainer} from "./components/Users/UsersContainer";
 function App() {
 
     return (
-            <div className='app-wrapper'>
-                <Header/>
-                <Navbar/>
-                <div className='app-wrapper-content'>
-                    <Routes>
-                        <Route path={'/profile'} element={<Profile/>}/>
-                        <Route path={'/dialogues'} element={<DialoguesContainer/>}>
+        <div className='app-wrapper'>
+            <Header/>
+            <Navbar/>
+            <div className='app-wrapper-content'>
+                <Routes>
+                    <Route path={'/profile'} element={<ProfileContainer/>}>
+                        <Route path={':id'} element={<ProfileContainer/>}
+                        />
+                    </Route>
+                    <Route path={'/dialogues'} element={<DialoguesContainer/>}>
                         <Route path={':id'} element={<DialoguesContainer/>}
                         />
-                        </Route>
-                        <Route path={'/users'} element={<UsersContainer/>}/>
-                        <Route path={'/music'} element={<Music/>}/>
-                        <Route path={'/news'} element={<News/>}/>
-                        <Route path={'/settings'} element={<Settings/>}/>
-                    </Routes>
-                </div>
+                    </Route>
+                    <Route path={'/users'} element={<UsersContainer/>}/>
+                    <Route path={'/music'} element={<Music/>}/>
+                    <Route path={'/news'} element={<News/>}/>
+                    <Route path={'/settings'} element={<Settings/>}/>
+                </Routes>
             </div>
+        </div>
     );
 }
 

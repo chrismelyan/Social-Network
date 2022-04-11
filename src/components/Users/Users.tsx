@@ -1,8 +1,8 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import s from './Users.module.css'
 import userPhoto from '../../assets/images/user.png'
 import {UserType} from "../../redux/users-reducer";
-
 
 type PropsType = {
     follow: (userID: number) => void
@@ -13,6 +13,7 @@ type PropsType = {
     totalUsersCount: number
     currentPage: number
 }
+
 const Users: React.FC<PropsType> = props => {
     const {
         follow,
@@ -46,7 +47,9 @@ const Users: React.FC<PropsType> = props => {
                 users.map(el => {
                     return <div key={el.id} className={s.user}>
                         <div className={s.avatar}>
+                            <NavLink to={'/profile/' + el.id}>
                             <img src={el.photos.small !== null ? el.photos.small : userPhoto} alt={'avatar'}/>
+                            </NavLink>
                             {el.followed
                                 ? <button
                                     onClick={() => unfollow(el.id)}>

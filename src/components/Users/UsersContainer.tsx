@@ -32,21 +32,21 @@ export type MapDispatchToPropsType = {
 }
 export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 
-export type UsersAPIComponentType = {
-    users: UserType[]
-    pageSize: number
-    isFetching: boolean
-    totalUsersCount: number
-    currentPage: number
-    follow: (id: number) => void
-    unfollow: (id: number) => void
-    setUsers: (users: UserType[]) => void
-    setCurrentPage: (currentPage: number) => void
-    setTotalUsersCount: (totalUsersCount: number) => void
-    toggleIsFetching: (isFetching: boolean) => void
-}
+// export type UsersAPIComponentType = {
+//     users: UserType[]
+//     pageSize: number
+//     isFetching: boolean
+//     totalUsersCount: number
+//     currentPage: number
+//     follow: (id: number) => void
+//     unfollow: (id: number) => void
+//     setUsers: (users: UserType[]) => void
+//     setCurrentPage: (currentPage: number) => void
+//     setTotalUsersCount: (totalUsersCount: number) => void
+//     toggleIsFetching: (isFetching: boolean) => void
+// }
 
-class UsersAPIComponent extends React.Component<UsersAPIComponentType, UsersResponseType> {
+class UsersAPIComponent extends React.Component<UsersPropsType, UsersResponseType> {
 
     componentDidMount() {
         this.props.toggleIsFetching(true);
@@ -94,17 +94,6 @@ const mapStateToProps = (state: RootStateType): MapStateToPropsType => {
         isFetching: state.usersPage.isFetching
     }
 }
-
-// const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
-//     return {
-//         follow: (userID: number) => dispatch(followAC(userID)),
-//         unfollow: (userID: number) => dispatch(unfollowAC(userID)),
-//         setUsers: (users: Array<UserType>) => dispatch(setUsersAC(users)),
-//         setCurrentPage: (currentPage: number) => dispatch(setCurrentPageAC(currentPage)),
-//         setTotalUsersCount: (totalUsersCount: number) => dispatch(setUsersTotalCountAC(totalUsersCount)),
-//         toggleIsFetching: (isFetching: boolean) => dispatch(toggleIsFetchingAC(isFetching))
-//     }
-// }
 
 export const UsersContainer = connect<MapStateToPropsType, MapDispatchToPropsType, {}, RootStateType>
 (mapStateToProps, {
