@@ -27,6 +27,11 @@ export type UsersResponseType = {
     totalCount: number
     error: null | string
 }
+export type UsersFollowResponseType = {
+    resultCode: number
+    messages: string
+    data: {}
+}
 
 const initialUsers: UsersReducerStateType = {
     users: [],

@@ -32,25 +32,14 @@ export type MapDispatchToPropsType = {
 }
 export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 
-// export type UsersAPIComponentType = {
-//     users: UserType[]
-//     pageSize: number
-//     isFetching: boolean
-//     totalUsersCount: number
-//     currentPage: number
-//     follow: (id: number) => void
-//     unfollow: (id: number) => void
-//     setUsers: (users: UserType[]) => void
-//     setCurrentPage: (currentPage: number) => void
-//     setTotalUsersCount: (totalUsersCount: number) => void
-//     toggleIsFetching: (isFetching: boolean) => void
-// }
-
 class UsersAPIComponent extends React.Component<UsersPropsType, UsersResponseType> {
 
     componentDidMount() {
         this.props.toggleIsFetching(true);
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
+                {
+                    withCredentials: true
+                })
                 .then((response: AxiosResponse<UsersResponseType>) => {
                 this.props.toggleIsFetching(false);
                 this.props.setUsers(response.data.items);
@@ -61,7 +50,10 @@ class UsersAPIComponent extends React.Component<UsersPropsType, UsersResponseTyp
     onPage = (pageNumber: number) => {
         this.props.toggleIsFetching(true);
         this.props.setCurrentPage(pageNumber);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`,
+            {
+                withCredentials: true
+            })
             .then((response: AxiosResponse<UsersResponseType>) => {
             this.props.toggleIsFetching(false);
             this.props.setUsers(response.data.items);

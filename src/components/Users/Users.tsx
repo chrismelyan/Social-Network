@@ -2,7 +2,8 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import s from './Users.module.css'
 import userPhoto from '../../assets/images/user.png'
-import {UserType} from "../../redux/users-reducer";
+import {UsersFollowResponseType, UserType} from "../../redux/users-reducer";
+import axios, {AxiosResponse} from "axios";
 
 type PropsType = {
     follow: (userID: number) => void
@@ -66,13 +67,32 @@ const Users: React.FC<PropsType> = props => {
                             </NavLink>
                             {el.followed
                                 ? <button
-                                    onClick={() => unfollow(el.id)}>
-                                    unfollow
-                                </button>
-                                : <button
-                                    onClick={() => follow(el.id)}>
-                                    follow
-                                </button>
+                                    onClick={() => {
+                                        axios.delete(`https://social-network.samuraijs.com/api/1.0/unfollow/${el.id}`,
+                                            {
+                                                withCredentials: true,
+                                                headers: {
+                                                    "API-KEY": "b0c3a94d-7a2a-456b-8145-07e38cb67e71"
+                                                }
+                                            })
+                                            .then((response: AxiosResponse<UsersFollowResponseType>) => {
+                                                if (response.data.resultCode === 0) {
+                                                unfollow(el.id);
+                                                }});
+                                    }}>unfollow</button>
+                                : <button onClick={() => {
+                                    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {},
+                                        {
+                                            withCredentials: true,
+                                            headers: {
+                                                "API-KEY": "b0c3a94d-7a2a-456b-8145-07e38cb67e71"
+                                            }
+                                        })
+                                        .then((response: AxiosResponse<UsersFollowResponseType>) => {
+                                            if (response.data.resultCode === 0) {
+                                                follow(el.id);
+                                            }});
+                                }}>follow</button>
                             }
                         </div>
                         <div className={s.userBlock}>

@@ -25,7 +25,6 @@ class HeaderContainer extends React.Component <HeaderContainerType, AuthResponse
         })
             .then((response: AxiosResponse<AuthResponseType>) => {
                 if (response.data.resultCode === 0) {
-                    debugger
                     let {id, email, login} = response.data.data;
                     this.props.setUserDataAC(id, email, login);
                 }
