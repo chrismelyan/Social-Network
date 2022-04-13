@@ -7,7 +7,7 @@ import {
     ProfileResponseType,
     setUserProfile
 } from "../../redux/profile-reducer";
-import {RootStateType} from "../../redux/reduxStore";
+import {RootStateType} from "../../redux/store";
 import {withRouter} from "./ComponentWithRouterProps";
 import {RouteComponentProps} from "@reach/router";
 

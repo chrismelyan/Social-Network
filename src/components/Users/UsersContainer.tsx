@@ -9,7 +9,7 @@ import {
     UsersResponseType,
     UserType
 } from "../../redux/users-reducer";
-import {RootStateType} from "../../redux/reduxStore";
+import {RootStateType} from "../../redux/store";
 import React from "react";
 import axios, {AxiosResponse} from "axios";
 import Users from "./Users";

@@ -1,7 +1,7 @@
 import {addPostAC, changeTextAC, PostsType} from "../../../redux/profile-reducer";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
-import {RootStateType} from "../../../redux/reduxStore";
+import {RootStateType} from "../../../redux/store";
 import {Dispatch} from "redux";
 
 type MapStateToPropsType = {

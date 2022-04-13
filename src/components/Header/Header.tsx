@@ -1,10 +1,22 @@
 import React from 'react';
 import s from './Header.module.css';
+import {NavLink} from "react-router-dom";
 
-const Header = () => {
+type HeaderType = {
+    isAuth: boolean
+    login: string | null
+    setUserDataAC: (id: number, email: string, login: string) => void
+}
+
+const Header = (props: HeaderType) => {
     return (
         <div className={s.header}>
             <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs4QqypbHrFtRuXnFgMcW2taWhb3mtHRHr8w&usqp=CAU' />
+
+            <div className={s.loginBlock}>
+                { props.isAuth ? "Chris"
+                : <NavLink to={'/login'}>Login</NavLink>}
+            </div>
         </div>
     );
 };
