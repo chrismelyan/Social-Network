@@ -68,11 +68,11 @@ const Users: React.FC<PropsType> = props => {
                             {el.followed
                                 ? <button
                                     onClick={() => {
-                                        axios.delete(`https://social-network.samuraijs.com/api/1.0/unfollow/${el.id}`,
+                                        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`,
                                             {
                                                 withCredentials: true,
                                                 headers: {
-                                                    "API-KEY": "b0c3a94d-7a2a-456b-8145-07e38cb67e71"
+                                                    "API-KEY": "73ec80e8-a879-4389-884b-c8ca6798760f"
                                                 }
                                             })
                                             .then((response: AxiosResponse<UsersFollowResponseType>) => {
@@ -85,7 +85,7 @@ const Users: React.FC<PropsType> = props => {
                                         {
                                             withCredentials: true,
                                             headers: {
-                                                "API-KEY": "b0c3a94d-7a2a-456b-8145-07e38cb67e71"
+                                                "API-KEY": "73ec80e8-a879-4389-884b-c8ca6798760f"
                                             }
                                         })
                                         .then((response: AxiosResponse<UsersFollowResponseType>) => {
