@@ -13,6 +13,8 @@ type PropsType = {
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    toggleIsFollowingProgress: (isFetching:boolean, userId: number) => void
+    followingInProgress: Array<number>
 }
 
 const Users: React.FC<PropsType> = props => {
@@ -23,7 +25,8 @@ const Users: React.FC<PropsType> = props => {
         users,
         pageSize,
         totalUsersCount,
-        currentPage
+        currentPage,
+        toggleIsFollowingProgress
     } = props
 
     // let pageCount = Math.ceil(totalUsersCount / pageSize);
@@ -67,17 +70,26 @@ const Users: React.FC<PropsType> = props => {
                             </NavLink>
                             {el.followed
                                 ? <button
+                                    disabled={props.followingInProgress.some(id => id === el.id)}
                                     onClick={() => {
+                                        toggleIsFollowingProgress(true, el.id)
                                         unFollowUsers(el.id).then((data) => {
                                                 if (data.resultCode === 0) {
                                                 unfollow(el.id);
-                                                }});
+                                                }
+                                            toggleIsFollowingProgress(false, el.id)
+                                        });
                                     }}>unfollow</button>
-                                : <button onClick={() => {
+                                : <button
+                                    disabled={props.followingInProgress.some(id => id === el.id)}
+                                    onClick={() => {
+                                    toggleIsFollowingProgress(true, el.id)
                                     followUsers(el.id).then((data) => {
                                             if (data.resultCode === 0) {
                                                 follow(el.id);
-                                            }});
+                                            }
+                                            toggleIsFollowingProgress(false, el.id);
+                                    });
                                 }}>follow</button>
                             }
                         </div>
