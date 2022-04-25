@@ -1,3 +1,6 @@
+import {authAPI} from "../api/api";
+import {Dispatch} from "redux";
+
 export const SET_USER_DATA = 'SET-USER-DATA';
 
 export type AuthDataType = {
@@ -43,5 +46,13 @@ export const setUserDataAC = (id: number, email: string, login: string) => ({
     data: {id, email, login}
 } as const);
 
+export const getAuthUserData = () => (dispatch: Dispatch) => {
+    authAPI.me().then((response) => {
+        if (response.data.resultCode === 0) {
+            let {id, email, login} = response.data.data;
+            dispatch(setUserDataAC(id, email, login));
+        }
+    });
+}
 
 export default authReducer;

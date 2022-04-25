@@ -1,3 +1,6 @@
+import {usersAPI} from "../api/api";
+import {Dispatch} from "redux";
+
 export const ADD_POST = 'ADD-POST';
 export const CHANGE_TEXT = 'CHANGE-TEXT';
 export const SET_USER_PROFILE = 'SET-USER-PROFILE';
@@ -81,5 +84,11 @@ export type ProfileReducerActionType = ReturnType<typeof addPostAC>
 export const addPostAC = (postMessage: string) => ({type: ADD_POST, postMessage: postMessage} as const)
 export const changeTextAC = (newText: string) => ({type: CHANGE_TEXT, newText: newText} as const)
 export const setUserProfile = (profile: ProfileResponseType) => ({type: SET_USER_PROFILE, profile} as const)
+
+export const getUserProfile = (userId: number) => (dispatch: Dispatch) => {
+    usersAPI.showProfile(userId).then((response) => {
+        dispatch(setUserProfile(response.data));
+    });
+}
 
 export default profileReducer;

@@ -1,7 +1,5 @@
 import axios, {AxiosResponse} from 'axios';
 import {UsersFollowResponseType, UsersResponseType} from "../redux/users-reducer";
-import {AuthResponseType} from "../redux/auth-reducer";
-import {ProfileResponseType} from "../redux/profile-reducer";
 
 
 const instance = axios.create({
@@ -21,9 +19,6 @@ export const usersAPI = {
     },
     showProfile (id: number) {
         return instance.get(`profile/${id}`)
-            .then((response: AxiosResponse<ProfileResponseType>) => {
-                return response.data;
-            });
     },
     followUsers (id: number) {
         return instance.post(`follow/${id}`)
@@ -36,11 +31,11 @@ export const usersAPI = {
             .then((response: AxiosResponse<UsersFollowResponseType>) => {
                 return response.data;
             })
-    },
-    authMe () {
+    }
+}
+
+export const authAPI = {
+    me() {
         return instance.get(`auth/me`)
-            .then((response: AxiosResponse<AuthResponseType>) => {
-                return response.data;
-            })
     }
 }
