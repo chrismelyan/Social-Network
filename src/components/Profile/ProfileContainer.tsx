@@ -9,6 +9,7 @@ import {
 import {RootStateType} from "../../redux/store";
 import {withRouter} from "./ComponentWithRouterProps";
 import {RouteComponentProps} from "@reach/router";
+import {Navigate} from "react-router-dom";
 
 type PathParamsType = {
     router: any
@@ -16,6 +17,7 @@ type PathParamsType = {
 
 type MapStateToPropsType = {
     profile: ProfileResponseType | null
+    isAuth: boolean
 }
 type MapDispatchToPropsType = {
     getUserProfile: (userId: number) => void
@@ -34,6 +36,7 @@ class ProfileContainer extends React.Component<ProfileContainerType, ProfilePage
     }
 
     render() {
+        if (!this.props.isAuth) return <Navigate to={'/login'}/>;
         return (
             <Profile {...this.props} profile={this.props.profile}/>
         )
@@ -41,7 +44,8 @@ class ProfileContainer extends React.Component<ProfileContainerType, ProfilePage
 }
 
 let mapStateToProps = (state: RootStateType): MapStateToPropsType => ({
-    profile: state.profilePage.profile
+    profile: state.profilePage.profile,
+    isAuth: state.auth.isAuth
 
 })
 
