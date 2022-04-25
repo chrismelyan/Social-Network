@@ -9,7 +9,7 @@ import {
 import {RootStateType} from "../../redux/store";
 import {withRouter} from "./ComponentWithRouterProps";
 import {RouteComponentProps} from "@reach/router";
-import {showProfile} from "../../api/api";
+import {usersAPI} from "../../api/api";
 
 type PathParamsType = {
     router: any
@@ -31,7 +31,7 @@ class ProfileContainer extends React.Component<ProfileContainerType, ProfilePage
         if (!userId) {
             userId = 23093
         }
-        showProfile(userId).then((data) => {
+        usersAPI.showProfile(userId).then((data) => {
                 this.props.setUserProfile(data);
             });
     }

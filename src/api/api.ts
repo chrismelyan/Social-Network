@@ -12,37 +12,35 @@ const instance = axios.create({
     }
 })
 
-export const getUsers = (currentPage: number, pageSize: number) => {
-    return instance.get(`users?page=${currentPage}&count=${pageSize}`)
-        .then((response: AxiosResponse<UsersResponseType>) => {
-            return response.data;
-        })
-}
-
-export const showProfile = (id: number) => {
-    return instance.get(`profile/${id}`)
-        .then((response: AxiosResponse<ProfileResponseType>) => {
-            return response.data;
-        });
-}
-
-export const followUsers = (id: number) => {
-    return instance.post(`follow/${id}`)
-        .then((response: AxiosResponse<UsersFollowResponseType>) => {
-            return response.data;
-        })
-}
-
-export const unFollowUsers = (id: number) => {
-    return instance.delete(`follow/${id}`)
-        .then((response: AxiosResponse<UsersFollowResponseType>) => {
-            return response.data;
-        })
-}
-
-export const authMe = () => {
-    return instance.get(`auth/me`)
-        .then((response: AxiosResponse<AuthResponseType>) => {
-            return response.data;
-        })
+export const usersAPI = {
+    getUsers(currentPage: number, pageSize: number) {
+        return instance.get(`users?page=${currentPage}&count=${pageSize}`)
+            .then((response: AxiosResponse<UsersResponseType>) => {
+                return response.data;
+            })
+    },
+    showProfile (id: number) {
+        return instance.get(`profile/${id}`)
+            .then((response: AxiosResponse<ProfileResponseType>) => {
+                return response.data;
+            });
+    },
+    followUsers (id: number) {
+        return instance.post(`follow/${id}`)
+            .then((response: AxiosResponse<UsersFollowResponseType>) => {
+                return response.data;
+            })
+    },
+    unFollowUsers (id: number) {
+        return instance.delete(`follow/${id}`)
+            .then((response: AxiosResponse<UsersFollowResponseType>) => {
+                return response.data;
+            })
+    },
+    authMe () {
+        return instance.get(`auth/me`)
+            .then((response: AxiosResponse<AuthResponseType>) => {
+                return response.data;
+            })
+    }
 }
