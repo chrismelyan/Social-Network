@@ -11,7 +11,7 @@ const Header = (props: HeaderType) => {
     return (
         <div className={s.header}>
             <img
-                src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs4QqypbHrFtRuXnFgMcW2taWhb3mtHRHr8w&usqp=CAU'
+                src='https://thumbs.dreamstime.com/b/something-like-aa-logo-letters-blue-red-gradation-114428171.jpg'
             alt={'logo'}
             />
 

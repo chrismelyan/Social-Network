@@ -41,7 +41,7 @@ const Users: React.FC<PropsType> = props => {
     }
 
     return (
-        <div>
+        <div className={s.tabContainer}>
             <div className={s.pageNumbers}>
                 {
                     pagesForPagination.map((page, index) => {

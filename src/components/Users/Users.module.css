@@ -1,10 +1,18 @@
 .loader {
-    width: 60px;
+    position: absolute;
+    top: 50%;
+//left: 50%;
+    left: calc(50% - 32px);
+    width: 70px;
+}
+.tab-container {
+    width: 100%;
+    min-height: 500px;
+    position: absolute;
 }
 
 .pageNumbers {
     cursor: pointer;
-    text-align: center;
     margin-bottom: 20px;
 }
 
@@ -28,7 +36,7 @@
 }
 
 .userBlock {
-    border: 1px solid midnightblue;
+    border: 1px solid #8c91b6;
     border-radius: 10px;
     width: 500px;
     padding: 10px;
@@ -36,11 +44,11 @@
     margin-left: 20px;
 }
 
-.nameStatus {
-    text-align: left;
-    margin-right: 300px;
-}
+/*.nameStatus {*/
+/*    text-align: left;*/
+/*    margin-right: 300px;*/
+/*}*/
 
-.location {
-    text-align: right;
-}
+/*.location {*/
+/*    text-align: right;*/
+/*}*/

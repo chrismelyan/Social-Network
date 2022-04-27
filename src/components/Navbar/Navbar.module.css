@@ -1,16 +1,28 @@
 .nav {
     grid-area: n;
-    background-color: steelblue;
+    background-color: #1c2444;
     padding: 20px;
+    border-radius: 5px;
 }
-
+.navBlock {
+    display: flex;
+    justify-content: flex-start;
+    padding: 10px;
+}
 .item {
-    color: white;
+    color: #8c91b6;
     font-size: large;
     text-decoration: none;
 }
 
 .active {
-    color: darkred;
+    color: #50b5ff;
     text-decoration: none;
+    font-size: large;
+}
+
+.icon {
+    height: 20px;
+    color: white;
+    margin-right: 10px;
 }

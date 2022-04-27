@@ -20,7 +20,7 @@ export type UsersReducerStateType = {
 
 export type UserType = {
     id: number
-    photos: { small: null | string, large: null | string }
+    photos: { small: string, large: string }
     followed: boolean
     name: string
     uniqueUrlName: null | string

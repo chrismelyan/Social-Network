@@ -1,14 +1,21 @@
 .header {
     grid-area: h;
-    background-color: darkred;
+    background-color: #441c24;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 .header img {
-    width: 70px;
+    width: 60px;
+    border-radius: 50%;
+    margin-left: 15px;
+    margin-top: 5px;
 }
 
 .loginBlock {
     float: right;
+    margin-right: 20px;
+    margin-top: 20px;
 }
 
 .loginBlock a {
