@@ -1,13 +1,16 @@
 import React from 'react';
 import s from './Header.module.css';
 import {NavLink} from "react-router-dom";
+import {ProfileResponseType} from "../../redux/profile-reducer";
 
 type HeaderType = {
     isAuth: boolean
     login: string | null
+    profile: ProfileResponseType | null
 }
 
 const Header = (props: HeaderType) => {
+
     return (
         <div className={s.header}>
             <img
@@ -18,7 +21,7 @@ const Header = (props: HeaderType) => {
             <div className={s.loginBlock}>
                 {
                     props.isAuth
-                        ? "Chris"
+                        ? `Welcome, Chris`
                         : <NavLink to={'/login'}>Login</NavLink>
                 }
             </div>
