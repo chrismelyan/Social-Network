@@ -15,6 +15,18 @@
     text-decoration: none;
 }
 
+/*.navBlock:hover {*/
+/*    background-color: #28436a;*/
+/*    color: #50b5ff;*/
+/*    border-radius: 5px;*/
+/*}*/
+.navBlock:hover,
+.navBlockActive {
+    background-color: #28436a;
+    color: #50b5ff;
+    border-radius: 5px;
+}
+
 .active {
     color: #50b5ff;
     text-decoration: none;

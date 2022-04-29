@@ -1,0 +1,18 @@
+.button {
+    color: #fff;
+    background-color: #50b5ff;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #50b5ff;
+    padding: 0.375rem 0.75rem;
+    font-size: .875rem;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.button:hover {
+    background-color: #449ad9;
+}

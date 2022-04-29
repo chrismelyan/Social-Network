@@ -2,6 +2,7 @@ import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
 import {PostsType} from "../../../redux/profile-reducer";
+import Button from "../../../common/Button";
 
 
 type MyPostsType = {
@@ -26,15 +27,17 @@ const MyPosts = (props: MyPostsType) => {
 
     return (
         <div className={s.postsBlock}>
-            <h3>My posts</h3>
+            <h3 style={{color: '#50b5ff'}}>My posts</h3>
             <div>
                 <div>
                     <textarea
+                        className={s.textarea}
+                        placeholder={'add a post here ...'}
                         value={props.value}
                         onChange={onChangeText}/>
                 </div>
                 <div>
-                    <button onClick={addPost}>Add post</button>
+                    <Button callback={addPost} title={'Add post'}/>
                 </div>
             </div>
             <div className={s.posts}>
