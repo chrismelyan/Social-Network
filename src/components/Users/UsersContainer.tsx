@@ -8,6 +8,7 @@ import React from "react";
 import Users from "./Users";
 import Preloader from "../../common/Preloader";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 export type MapStateToPropsType = {
     users: UserType[]
@@ -24,7 +25,7 @@ export type MapDispatchToPropsType = {
 }
 export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 
-class UsersAPIComponent extends React.Component<UsersPropsType, UsersResponseType> {
+class UsersContainer extends React.Component<UsersPropsType, UsersResponseType> {
 
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize);
@@ -63,5 +64,5 @@ const mapStateToProps = (state: RootStateType): MapStateToPropsType => {
     }
 }
 
-export const UsersContainer = withAuthRedirect(connect<MapStateToPropsType, MapDispatchToPropsType, {}, RootStateType>
-(mapStateToProps, {getUsers, followUsers, unFollowUsers})(UsersAPIComponent));
+export default compose<React.ComponentType>(withAuthRedirect, connect<MapStateToPropsType, MapDispatchToPropsType, {}, RootStateType>
+(mapStateToProps, {getUsers, followUsers, unFollowUsers}))(UsersContainer);
