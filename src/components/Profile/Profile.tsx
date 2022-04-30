@@ -3,6 +3,7 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {ProfileResponseType} from "../../redux/profile-reducer";
 import Preloader from "../../common/Preloader";
+import AboutMe from './AboutMe';
 
 type ProfileType = {
     profile: ProfileResponseType | null
@@ -15,6 +16,8 @@ const Profile = (props: ProfileType) => {
     return (
         <div>
             <ProfileInfo profile={props.profile}/>
+            <hr/>
+            <AboutMe aboutMe={props.profile.aboutMe}/>
             <hr/>
             <MyPostsContainer />
         </div>
