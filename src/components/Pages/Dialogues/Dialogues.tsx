@@ -4,6 +4,8 @@ import DialogueItem from "./DialogueItem/DialogueItem";
 import Message from "./Message/Message";
 import {DialoguesPageType} from "../../../redux/dialogues-reducer";
 import {Navigate} from "react-router-dom";
+import Button from "../../../common/Button";
+import a from '../../../common/Textarea.module.css'
 
 type DialoguesPropsType = {
     dialoguesPage: DialoguesPageType
@@ -31,11 +33,20 @@ const Dialogues = (props: DialoguesPropsType) => {
             <div className={s.dialoguesItems}>
                 {dialoguesElements}
             </div>
-            <div className={s.messages}>
-                <div>{messagesElements}</div>
+            <div className={s.messageBlock}>
+                <div className={s.messages}>
+                    <div className={s.item}>{messagesElements}</div>
+                </div>
                 <div>
-                    <div><textarea value={props.newMessage} onChange={onChangeHandler} placeholder={'Enter your text ...'}/></div>
-                    <div><button onClick={onClickHandler}>send</button></div>
+                    <div>
+                        <textarea
+                            className={a.textarea}
+                            value={props.newMessage}
+                            onChange={onChangeHandler}
+                            placeholder={'Enter your text ...'}
+                        />
+                    </div>
+                    <div><Button title={'Send'} callback={onClickHandler}/></div>
                 </div>
             </div>
         </div>

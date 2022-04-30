@@ -3,6 +3,7 @@ import s from './MyPosts.module.css';
 import Post from "./Post/Post";
 import {PostsType} from "../../../redux/profile-reducer";
 import Button from "../../../common/Button";
+import a from '../../../common/Textarea.module.css'
 
 
 type MyPostsType = {
@@ -27,11 +28,11 @@ const MyPosts = (props: MyPostsType) => {
 
     return (
         <div className={s.postsBlock}>
-            <h3 style={{color: '#50b5ff'}}>My posts</h3>
+            <h3 style={{color: '#8c91b6'}}>My posts</h3>
             <div>
                 <div>
                     <textarea
-                        className={s.textarea}
+                        className={a.textarea}
                         placeholder={'add a post here ...'}
                         value={props.value}
                         onChange={onChangeText}/>

@@ -5,17 +5,3 @@
 .posts {
     margin-top: 10px;
 }
-
-.textarea {
-    width: 500px;
-    height: 100px;
-    padding: 12px 20px;
-    box-sizing: border-box;
-    border: 2px solid #44496f;
-    border-radius: 4px;
-    background-color: #1e2745;
-    font-size: 16px;
-    resize: none;
-    color: #44496f;
-    margin-bottom: 10px;
-}

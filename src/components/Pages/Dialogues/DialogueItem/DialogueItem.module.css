@@ -1,9 +1,20 @@
+.item {
+    margin: 5px;
+    padding: 7px;
+}
+
 .active {
-    color: darkred;
+    color: #50b5ff;
     text-decoration: none;
 }
 
 .inactive {
-    color: black;
+    color: #8c91b6;
     text-decoration: none;
+}
+
+.item:hover {
+    background-color: #28436a;
+    color: #50b5ff;
+    border-radius: 5px;
 }
