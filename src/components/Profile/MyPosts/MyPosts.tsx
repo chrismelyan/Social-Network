@@ -33,7 +33,7 @@ const MyPosts = (props: MyPostsType) => {
                 <div>
                     <textarea
                         className={a.textarea}
-                        placeholder={'add a post here ...'}
+                        placeholder={"what's going on ..."}
                         value={props.value}
                         onChange={onChangeText}/>
                 </div>
