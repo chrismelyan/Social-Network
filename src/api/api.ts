@@ -18,7 +18,8 @@ export const usersAPI = {
             })
     },
     showProfile (id: number) {
-        return instance.get(`profile/${id}`)
+        console.warn('Obsolete method. Please use profileAPI object')
+        return profileAPI.showProfile(id)
     },
     followUsers (id: number) {
         return instance.post(`follow/${id}`)
@@ -31,6 +32,18 @@ export const usersAPI = {
             .then((response: AxiosResponse<UsersFollowResponseType>) => {
                 return response.data;
             })
+    }
+}
+
+export const profileAPI = {
+    showProfile (id: number) {
+        return instance.get(`profile/${id}`)
+    },
+    getStatus (userId: number) {
+        return instance.get(`profile/status/${userId}`)
+    },
+    updateStatus (status: string) {
+        return instance.put(`profile/status`, {status})
     }
 }
 

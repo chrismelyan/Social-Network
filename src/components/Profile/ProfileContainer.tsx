@@ -2,9 +2,9 @@ import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {
-    getUserProfile,
+    getUserProfile, getUserStatus,
     ProfilePageType,
-    ProfileResponseType
+    ProfileResponseType, updateUserStatus
 } from "../../redux/profile-reducer";
 import {RootStateType} from "../../redux/store";
 import {withRouter} from "./ComponentWithRouterProps";
@@ -18,14 +18,18 @@ type PathParamsType = {
 type MapStateToPropsType = {
     profile: ProfileResponseType | null
     isAuth: boolean
+    status: string
 }
 export type MapDispatchToPropsType = {
     getUserProfile: (userId: number) => void
+    getUserStatus: (userId: number) => void
+    updateUserStatus: (status: string) => void
+
 }
 
 type ProfileContainerType = MapStateToPropsType & MapDispatchToPropsType & RouteComponentProps<PathParamsType>
 
-class ProfileContainer extends React.Component<ProfileContainerType, ProfilePageType>{
+class ProfileContainer extends React.Component<ProfileContainerType, ProfilePageType> {
 
     componentDidMount() {
         let userId = this.props.router.params.userId
@@ -33,19 +37,27 @@ class ProfileContainer extends React.Component<ProfileContainerType, ProfilePage
             userId = 23093
         }
         this.props.getUserProfile(userId);
+        this.props.getUserStatus(userId);
     }
 
     render() {
         return (
-            <Profile {...this.props} profile={this.props.profile}/>
+            <Profile
+                {...this.props}
+                profile={this.props.profile}
+                status={this.props.status}
+                updateUserStatus={this.props.updateUserStatus}
+            />
         )
     }
 }
+
 let mapStateToProps = (state: RootStateType): MapStateToPropsType => ({
     profile: state.profilePage.profile,
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    status: state.profilePage.status
 })
 
 export default compose<React.ComponentType>(withAuthRedirect, withRouter,
     connect<MapStateToPropsType, MapDispatchToPropsType, {}, RootStateType>
-(mapStateToProps, {getUserProfile}))(ProfileContainer);
+    (mapStateToProps, {getUserProfile, getUserStatus, updateUserStatus}))(ProfileContainer);

@@ -6,6 +6,8 @@ import Preloader from "../../../common/Preloader";
 
 type ProfileInfoType = {
     profile: ProfileResponseType | null
+    status: string
+    updateUserStatus: (status: string) => void
 }
 
 const ProfileInfo = (props: ProfileInfoType) => {
@@ -22,7 +24,7 @@ const ProfileInfo = (props: ProfileInfoType) => {
             </div>
             <div className={s.descriptionBlock}>
                 <h1>{props.profile.fullName}</h1>
-                <ProfileStatus status={props.profile.aboutMe}/>
+                <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus}/>
             </div>
         </div>
     );

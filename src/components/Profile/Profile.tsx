@@ -7,6 +7,8 @@ import AboutMe from './AboutMe';
 
 type ProfileType = {
     profile: ProfileResponseType | null
+    status: string
+    updateUserStatus: (status: string) => void
 }
 
 const Profile = (props: ProfileType) => {
@@ -15,7 +17,7 @@ const Profile = (props: ProfileType) => {
     }
     return (
         <div>
-            <ProfileInfo profile={props.profile}/>
+            <ProfileInfo profile={props.profile} status={props.status} updateUserStatus={props.updateUserStatus}/>
             <hr/>
             <AboutMe aboutMe={props.profile.aboutMe}/>
             <hr/>
