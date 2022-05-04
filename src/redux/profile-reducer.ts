@@ -1,4 +1,4 @@
-import {profileAPI, usersAPI} from "../api/api";
+import {profileAPI} from "../api/api";
 import {Dispatch} from "redux";
 
 const ADD_POST = 'ADD-POST';
@@ -93,7 +93,7 @@ export const setUserProfile = (profile: ProfileResponseType) => ({type: SET_USER
 export const setStatus = (status: string) => ({type: SET_STATUS, status} as const)
 
 export const getUserProfile = (userId: number) => (dispatch: Dispatch) => {
-    usersAPI.showProfile(userId).then((response) => {
+    profileAPI.showProfile(userId).then((response) => {
         dispatch(setUserProfile(response.data));
     });
 }
