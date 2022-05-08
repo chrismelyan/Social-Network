@@ -1,45 +1,28 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
 import {PostsType} from "../../../redux/profile-reducer";
-import Button from "../../../common/Button";
-import a from '../../../common/Textarea.module.css'
+import AddPostForm from "../../../common/AddPostForm";
 
 
 type MyPostsType = {
     posts: Array<PostsType>
-    value: string
     onAddPost: (value: string) => void
-    onChangeText: (text: string) => void
 }
 
 const MyPosts = (props: MyPostsType) => {
 
     let postElement = props.posts.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount} />);
 
-    let onChangeText = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.onChangeText(e.currentTarget.value)
-    }
-
-    let addPost = () => {
-        props.onAddPost(props.value)
-        // newPostElement.current.value = ''
+    let addPost = (newPost: string) => {
+        props.onAddPost(newPost)
     }
 
     return (
         <div className={s.postsBlock}>
             <h3 style={{color: '#8c91b6'}}>My posts</h3>
             <div>
-                <div>
-                    <textarea
-                        className={a.textarea}
-                        placeholder={"what's going on ..."}
-                        value={props.value}
-                        onChange={onChangeText}/>
-                </div>
-                <div>
-                    <Button callback={addPost} title={'Add post'}/>
-                </div>
+                <AddPostForm addPost={addPost}/>
             </div>
             <div className={s.posts}>
                 {postElement}

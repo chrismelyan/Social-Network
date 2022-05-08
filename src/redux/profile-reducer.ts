@@ -2,13 +2,11 @@ import {profileAPI} from "../api/api";
 import {Dispatch} from "redux";
 
 const ADD_POST = 'ADD-POST';
-const CHANGE_TEXT = 'CHANGE-TEXT';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
 const SET_STATUS = 'SET-STATUS';
 
 export type ProfilePageType = {
     posts: PostsType[]
-    newMessageText: string
     profile: ProfileResponseType | null
     status: string
 }
@@ -47,7 +45,6 @@ const initialProfile: ProfilePageType = {
         {id: 3, message: "Great app", likesCount: 78},
         {id: 4, message: "It's my first post", likesCount: 14}
     ],
-    newMessageText: '',
     profile: null,
     status: '',
 }
@@ -63,12 +60,6 @@ const  profileReducer = (state: ProfilePageType = initialProfile, action: Profil
             return {
                 ...state,
                posts: [...state.posts, newPost],
-                newMessageText: ''
-            };
-        case CHANGE_TEXT:
-            return {
-                ...state,
-                newMessageText: action.newText
             };
         case SET_USER_PROFILE:
             return {
@@ -83,12 +74,10 @@ const  profileReducer = (state: ProfilePageType = initialProfile, action: Profil
 }
 
 export type ProfileReducerActionType = ReturnType<typeof addPostAC>
-    | ReturnType<typeof changeTextAC>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setStatus>
 
 export const addPostAC = (postMessage: string) => ({type: ADD_POST, postMessage: postMessage} as const)
-export const changeTextAC = (newText: string) => ({type: CHANGE_TEXT, newText: newText} as const)
 export const setUserProfile = (profile: ProfileResponseType) => ({type: SET_USER_PROFILE, profile} as const)
 export const setStatus = (status: string) => ({type: SET_STATUS, status} as const)
 

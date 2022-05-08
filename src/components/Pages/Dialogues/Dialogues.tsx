@@ -1,17 +1,14 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import s from './Dialogues.module.css'
 import DialogueItem from "./DialogueItem/DialogueItem";
 import Message from "./Message/Message";
 import {DialoguesPageType} from "../../../redux/dialogues-reducer";
 import {Navigate} from "react-router-dom";
-import Button from "../../../common/Button";
-import a from '../../../common/Textarea.module.css'
+import AddMessageForm from "../../../common/AddMessageForm";
 
 type DialoguesPropsType = {
     dialoguesPage: DialoguesPageType
-    newMessage: string
-    updateDialoguesText: (value: string) => void
-    sendMessage: () => void
+    sendMessage: (newMessage: string) => void
     isAuth: boolean
 }
 
@@ -20,11 +17,8 @@ const Dialogues = (props: DialoguesPropsType) => {
     let dialoguesElements = props.dialoguesPage.dialogues.map(d => <DialogueItem key={d.id} name={d.name} id={d.id}/>);
     let messagesElements = props.dialoguesPage.messages.map(m => <Message key={m.id} message={m.message}/>);
 
-    const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.updateDialoguesText(e.currentTarget.value)
-    }
-    const onClickHandler = () => {
-        props.sendMessage()
+    const addNewMessage = (newMessage: string) => {
+        props.sendMessage(newMessage)
     }
 
     if (!props.isAuth) return <Navigate to={'/login'}/>;
@@ -37,17 +31,7 @@ const Dialogues = (props: DialoguesPropsType) => {
                 <div className={s.messages}>
                     <div className={s.item}>{messagesElements}</div>
                 </div>
-                <div>
-                    <div>
-                        <textarea
-                            className={a.textarea}
-                            value={props.newMessage}
-                            onChange={onChangeHandler}
-                            placeholder={'Enter your text ...'}
-                        />
-                    </div>
-                    <div><Button title={'Send'} callback={onClickHandler}/></div>
-                </div>
+                <AddMessageForm sendMessage={addNewMessage}/>
             </div>
         </div>
     );

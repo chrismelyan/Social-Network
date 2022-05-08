@@ -47,8 +47,7 @@ const Login = () => {
                 </Form>
             </Formik>
         </div>
-    )
-        ;
+    );
 };
 
 export default Login;
