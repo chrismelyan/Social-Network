@@ -16,3 +16,11 @@
 .textarea::placeholder {
     color: #44496f;
 }
+
+.error {
+    border: 2px solid red;
+}
+
+.errorText {
+    color: red;
+}

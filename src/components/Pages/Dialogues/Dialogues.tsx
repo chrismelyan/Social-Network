@@ -4,7 +4,7 @@ import DialogueItem from "./DialogueItem/DialogueItem";
 import Message from "./Message/Message";
 import {DialoguesPageType} from "../../../redux/dialogues-reducer";
 import {Navigate} from "react-router-dom";
-import AddMessageForm from "../../../common/AddMessageForm";
+import AddMessageForm from "./Message/AddMessageForm";
 
 type DialoguesPropsType = {
     dialoguesPage: DialoguesPageType

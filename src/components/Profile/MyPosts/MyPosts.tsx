@@ -2,7 +2,7 @@ import React from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
 import {PostsType} from "../../../redux/profile-reducer";
-import AddPostForm from "../../../common/AddPostForm";
+import AddPostForm from "./AddPostForm";
 
 
 type MyPostsType = {
