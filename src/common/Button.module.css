@@ -1,7 +1,7 @@
 .button {
     color: #fff;
     background-color: #50b5ff;
-    display: inline-block;
+    display: block;
     text-align: center;
     vertical-align: middle;
     border: 1px solid #50b5ff;
@@ -10,7 +10,7 @@
     border-radius: 5px;
     text-decoration: none;
     cursor: pointer;
-    margin: 3px;
+    margin: 8px 0;
 }
 
 .button:hover {

@@ -43,7 +43,7 @@ const initialProfile: ProfilePageType = {
         {id: 4, message: "It's my first post", likesCount: 14}
     ],
     profile: null,
-    status: '',
+    status: ''
 }
 
 const  profileReducer = (state: ProfilePageType = initialProfile,

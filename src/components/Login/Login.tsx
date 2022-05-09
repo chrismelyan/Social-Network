@@ -1,5 +1,5 @@
 import React from 'react';
-import {Formik, Form, Field} from 'formik';
+import {Formik, Form, Field, FormikValues, FormikHelpers, FormikProps} from 'formik';
 import * as Yup from 'yup';
 import s from './Login.module.css'
 import a from '../../common/Button.module.css'
@@ -15,7 +15,7 @@ type InitialValuesType = {
     rememberMe: boolean
 }
 type LoginType = {
-    login: (email: string, password: string, rememberMe: boolean) => void
+    login: (email: string, password: string, rememberMe: boolean, setStatus: (status?: any) => void) => void
     isAuth: boolean
 }
 type MapStateTotPropsType = {
@@ -28,11 +28,12 @@ const Login = (props: LoginType) => {
         rememberMe: false
     }
     const validationSchema = Yup.object({
-        email: Yup.string().required('Required'),
-        password: Yup.string().required('Required').min(8, 'Minimum 8 symbols'),
+        email: Yup.string().required('Required').email('Invalid email format'),
+        password: Yup.string().required('Required').min(5, 'Minimum 5 symbols'),
     })
-    const onSubmit = (values: InitialValuesType) => {
-        props.login(values.email, values.password, values.rememberMe)
+    const onSubmit = (values: InitialValuesType, {setSubmitting, setStatus}: FormikHelpers<InitialValuesType>) => {
+        props.login(values.email, values.password, values.rememberMe, setStatus)
+        setSubmitting(false)
     }
 
     if (props.isAuth) {
@@ -44,22 +45,34 @@ const Login = (props: LoginType) => {
             <h1>LOG IN</h1>
             <Formik initialValues={initialValues}
                     validationSchema={validationSchema}
+                    validateOnBlur
                     onSubmit={onSubmit}>
-                <Form>
-                    <div>
-                        <FormControl control={'input'} name={'email'} placeholder={'email'}/>
-                    </div>
-                    <div>
-                        <FormControl control={'password'} name={'password'} placeholder={'password'}/>
-                    </div>
-                    <div>
-                        <Field type={'checkbox'} name={'rememberMe'} id={'rememberMe'}/>
-                        <label htmlFor={'rememberMe'}>remember me</label>
-                    </div>
-                    <div>
-                        <button className={a.button} type={'submit'}>Login</button>
-                    </div>
-                </Form>
+                {(formik: FormikProps<FormikValues>) => {
+                    const {isSubmitting, status} = formik
+                    return (
+                        <Form>
+                            <div>
+                                <FormControl control={'input'} name={'email'} placeholder={'email'}/>
+                            </div>
+                            <div>
+                                <FormControl control={'password'} name={'password'} placeholder={'password'}/>
+                            </div>
+                            <div style={{marginBottom: '8px'}}>
+                                <Field type={'checkbox'} name={'rememberMe'} id={'rememberMe'}/>
+                                <label htmlFor={'rememberMe'}>remember me</label>
+                            </div>
+                            <div>
+                                <button className={a.button} type={'submit'} disabled={isSubmitting}>
+                                    Login
+                                </button>
+                            </div>
+                            {status
+                                ? <span style={{color: 'red'}}>Your email or password is incorrect</span>
+                                : <span style={{margin: '8px', width: '300px'}}></span>}
+                        </Form>
+                    )
+                }}
+
             </Formik>
         </div>
     );

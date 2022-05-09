@@ -1,19 +1,14 @@
 import React from 'react';
-import {ErrorMessage, Field} from "formik";
+import {ErrorMessage, Field, FormikValues} from "formik";
 import a from './Textarea.module.css'
+import s from "./Input.module.css";
 
-type TextareaType = {
-    name: string
-    placeholder: string
-    error?: boolean
-}
-const Textarea = (props: TextareaType) => {
-    const {name, placeholder, error} = props
-    const TextareaStyle = `${error ? a.error : ''} ${a.textarea}`
+const Textarea = (props: FormikValues) => {
+    const {name, placeholder} = props
     return (
-        <div>
+        <div className={s.textareaBlock}>
             <Field
-                className={TextareaStyle}
+                className={a.textarea}
                 name={name}
                 id={name}
                 as={'textarea'}

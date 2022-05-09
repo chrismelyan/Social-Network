@@ -1,19 +1,22 @@
 import React from 'react';
-import {ErrorMessage, Field} from "formik";
+import {ErrorMessage, Field, FormikValues} from "formik";
 import s from './Input.module.css'
 
-type InputFormType = {
-    name: string
-    placeholder: string
-}
-const Input = (props: InputFormType) => {
+const Input = (props: FormikValues) => {
     const {name, placeholder} = props
     return (
-        <div>
-            <Field className={s.input} placeholder={placeholder} type={'text'} name={name} id={name}/>
-            <div className={s.errorText}>
-                <ErrorMessage name={name}/>
-            </div>
+        <div className={s.inputBlock}>
+            <Field name={name} id={name}>
+                {({field, meta: {touched, error}}: FormikValues) => {
+                    return <input className={`${s.input} ${touched && error ? s.invalid : ''}`}
+                                  {...field}
+                                  placeholder={placeholder}
+                                  type={'text'}/>
+                }}
+            </Field>
+                <ErrorMessage name={name}>
+                    {errorMessage => <div className={s.errorText}>{errorMessage}</div>}
+                </ErrorMessage>
         </div>
     );
 };

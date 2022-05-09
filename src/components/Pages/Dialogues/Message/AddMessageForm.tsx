@@ -19,10 +19,11 @@ const AddMessageForm = (props: AddMessageFormType) => {
         props.sendMessage(values.newMessage);
     }
     const validationSchema = Yup.object({
-        newMessage: Yup.string().required('Required').max(30, `Maximum 30 symbols`)
+        newMessage: Yup.string().max(3000, `The message is too long`).required('required')
     })
 
     return (
+        <div>
         <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
@@ -32,11 +33,10 @@ const AddMessageForm = (props: AddMessageFormType) => {
             }}>
             <Form>
                 <FormControl control={'textarea'} name={'newMessage'} placeholder={"add a message ..."}/>
-                <div>
-                    <button className={s.button} type={'submit'}>Send</button>
-                </div>
+                <button className={s.button} type={'submit'}>Send</button>
             </Form>
         </Formik>
+        </div>
     )
 }
 

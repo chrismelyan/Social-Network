@@ -2,14 +2,9 @@ import React from 'react';
 import Textarea from "./Textarea";
 import Input from "./Input";
 import Password from "./Password";
+import {FormikValues} from "formik";
 
-type FormControlType = {
-    control: string
-    name: string
-    placeholder: string
-    error?: boolean
-}
-const FormControl = (props: FormControlType) => {
+const FormControl = (props: FormikValues) => {
     const {control, ...rest} = props
     switch(control) {
         case 'input':
