@@ -1,6 +1,7 @@
 import React from 'react';
 import Textarea from "./Textarea";
 import Input from "./Input";
+import Password from "./Password";
 
 type FormControlType = {
     control: string
@@ -15,6 +16,8 @@ const FormControl = (props: FormControlType) => {
             return <Input {...rest}/>
         case 'textarea':
             return <Textarea {...rest}/>
+        case 'password':
+            return <Password {...rest}/>
         default:
             return null
     }

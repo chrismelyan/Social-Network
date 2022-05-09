@@ -2,15 +2,15 @@ import React from 'react';
 import {ErrorMessage, Field} from "formik";
 import s from './Input.module.css'
 
-type InputFormType = {
+type PasswordFormType = {
     name: string
     placeholder: string
 }
-const Input = (props: InputFormType) => {
+const Password = (props: PasswordFormType) => {
     const {name, placeholder} = props
     return (
         <div>
-            <Field className={s.input} placeholder={placeholder} type={'text'} name={name} id={name}/>
+            <Field className={s.input} placeholder={placeholder} type={'password'} name={name} id={name}/>
             <div className={s.errorText}>
                 <ErrorMessage name={name}/>
             </div>
@@ -18,4 +18,4 @@ const Input = (props: InputFormType) => {
     );
 };
 
-export default Input;
+export default Password;

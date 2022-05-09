@@ -1,5 +1,5 @@
 import {profileAPI} from "../api/api";
-import {Dispatch} from "redux";
+import {AppThunk} from "./store";
 
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
@@ -10,7 +10,6 @@ export type ProfilePageType = {
     profile: ProfileResponseType | null
     status: string
 }
-
 export type ProfileResponseType = {
     aboutMe: string
     contacts: ContactsType
@@ -20,7 +19,6 @@ export type ProfileResponseType = {
     userId: number
     photos: {small: string, large: string}
 }
-
 type ContactsType = {
     facebook: string
     website: string
@@ -31,7 +29,6 @@ type ContactsType = {
     github: string
     mainLink: string
 }
-
 export type PostsType = {
     id: number
     message: string
@@ -49,7 +46,8 @@ const initialProfile: ProfilePageType = {
     status: '',
 }
 
-const  profileReducer = (state: ProfilePageType = initialProfile, action: ProfileReducerActionType): ProfilePageType => {
+const  profileReducer = (state: ProfilePageType = initialProfile,
+                         action: ProfileReducerActionType): ProfilePageType => {
     switch (action.type) {
         case ADD_POST:
             const newPost = {
@@ -57,47 +55,39 @@ const  profileReducer = (state: ProfilePageType = initialProfile, action: Profil
                 message: action.postMessage,
                 likesCount: 0
             }
-            return {
-                ...state,
-               posts: [...state.posts, newPost],
-            };
+            return {...state, posts: [...state.posts, newPost]};
         case SET_USER_PROFILE:
-            return {
-                ...state,
-                profile: action.profile
-            };
+            return {...state, profile: action.profile};
         case SET_STATUS:
             return {...state, status: action.status}
         default:
             return state;
     }
 }
-
+// ACTION TYPE
 export type ProfileReducerActionType = ReturnType<typeof addPostAC>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setStatus>
 
+// ACTION CREATORS
 export const addPostAC = (postMessage: string) => ({type: ADD_POST, postMessage: postMessage} as const)
 export const setUserProfile = (profile: ProfileResponseType) => ({type: SET_USER_PROFILE, profile} as const)
 export const setStatus = (status: string) => ({type: SET_STATUS, status} as const)
 
-export const getUserProfile = (userId: number) => (dispatch: Dispatch) => {
-    profileAPI.showProfile(userId).then((response) => {
+// THUNK CREATORS
+export const getUserProfile = (userId: number): AppThunk => async dispatch => {
+    const response = await profileAPI.showProfile(userId)
         dispatch(setUserProfile(response.data));
-    });
 }
-export const getUserStatus = (userId: number) => (dispatch: Dispatch) => {
-    profileAPI.getStatus(userId).then((response) => {
+export const getUserStatus = (userId: number): AppThunk => async dispatch => {
+    const response = await profileAPI.getStatus(userId)
         dispatch(setStatus(response.data));
-    });
 }
-export const updateUserStatus = (status: string) => (dispatch: Dispatch) => {
-    profileAPI.updateStatus(status)
-        .then((response) => {
+export const updateUserStatus = (status: string): AppThunk => async dispatch => {
+    const response = await profileAPI.updateStatus(status)
             if(response.data.resultCode === 0) {
                 dispatch(setStatus(status));
             }
-    });
 }
 
 export default profileReducer;

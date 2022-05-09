@@ -7,6 +7,7 @@ type HeaderType = {
     isAuth: boolean
     login: string | null
     profile: ProfileResponseType | null
+    logout: () => void
 }
 
 const Header = (props: HeaderType) => {
@@ -15,13 +16,16 @@ const Header = (props: HeaderType) => {
         <div className={s.header}>
             <img
                 src='https://thumbs.dreamstime.com/b/something-like-aa-logo-letters-blue-red-gradation-114428171.jpg'
-            alt={'logo'}
+                alt={'logo'}
             />
 
             <div className={s.loginBlock}>
                 {
                     props.isAuth
-                        ? `Welcome, Chris`
+                        ? <div>
+                            <div>Welcome, {props.login} </div>
+                            <button onClick={props.logout}>Log out</button>
+                        </div>
                         : <NavLink to={'/login'}>Login</NavLink>
                 }
             </div>

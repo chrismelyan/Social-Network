@@ -1,4 +1,4 @@
-export const SEND_MESSAGE = 'SEND-MESSAGE';
+const SEND_MESSAGE = 'SEND-MESSAGE';
 
 export type DialoguesPageType = {
     dialogues: DialoguesType[]
@@ -29,7 +29,7 @@ const initialDialogues: DialoguesPageType = {
     ]
 }
 
-const dialoguesReducer = (state = initialDialogues,
+const dialoguesReducer = (state: DialoguesPageType = initialDialogues,
                           action: DialoguesReducerActionType): DialoguesPageType => {
     switch(action.type) {
         case SEND_MESSAGE:
@@ -38,9 +38,10 @@ const dialoguesReducer = (state = initialDialogues,
             return state;
     }
 }
-
+// ACTION TYPE
 export type DialoguesReducerActionType = ReturnType<typeof sendMessageAC>;
 
+// ACTION CREATORS
 export const sendMessageAC = (newDialogueText: string) => ({type: SEND_MESSAGE, newDialogueText} as const)
 
 export default dialoguesReducer;

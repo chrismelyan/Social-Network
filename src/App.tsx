@@ -9,7 +9,7 @@ import Settings from "./components/Pages/Settings/Settings";
 import {DialoguesContainer} from "./components/Pages/Dialogues/DialoguesContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import LoginPage from "./components/Login/Login";
+import Login from "./components/Login/Login";
 
 
 function App() {
@@ -32,7 +32,7 @@ function App() {
                     <Route path={'/music'} element={<Music/>}/>
                     <Route path={'/news'} element={<News/>}/>
                     <Route path={'/settings'} element={<Settings/>}/>
-                    <Route path={'/login'} element={<LoginPage/>}/>
+                    <Route path={'/login'} element={<Login/>}/>
                 </Routes>
             </div>
         </div>

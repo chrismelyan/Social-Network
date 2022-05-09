@@ -1,48 +1,63 @@
 import React from 'react';
-import {Formik, Form, Field, ErrorMessage} from 'formik';
+import {Formik, Form, Field} from 'formik';
 import * as Yup from 'yup';
+import s from './Login.module.css'
+import a from '../../common/Button.module.css'
+import FormControl from "../../common/FormControl";
+import {connect} from "react-redux";
+import {login} from "../../redux/auth-reducer";
+import {RootStateType} from "../../redux/store";
+import {Navigate} from "react-router-dom";
 
 type InitialValuesType = {
-    login: string
+    email: string
     password: string
     rememberMe: boolean
 }
-
-const Login = () => {
+type LoginType = {
+    login: (email: string, password: string, rememberMe: boolean) => void
+    isAuth: boolean
+}
+type MapStateTotPropsType = {
+    isAuth: boolean
+}
+const Login = (props: LoginType) => {
     const initialValues: InitialValuesType = {
-        login: '',
+        email: '',
         password: '',
         rememberMe: false
     }
     const validationSchema = Yup.object({
-        login: Yup.string().required('Required'),
-        password: Yup.string().required('Required'),
+        email: Yup.string().required('Required'),
+        password: Yup.string().required('Required').min(8, 'Minimum 8 symbols'),
     })
     const onSubmit = (values: InitialValuesType) => {
-        console.log(values)
+        props.login(values.email, values.password, values.rememberMe)
+    }
+
+    if (props.isAuth) {
+        return <Navigate to={"/profile"}/>
     }
 
     return (
-        <div>
+        <div className={s.formContainer}>
             <h1>LOG IN</h1>
             <Formik initialValues={initialValues}
                     validationSchema={validationSchema}
                     onSubmit={onSubmit}>
                 <Form>
                     <div>
-                        <Field placeholder={'login'} type={'text'} name={'login'} id={'login'}/>
-                        <div><ErrorMessage name={'login'}/></div>
+                        <FormControl control={'input'} name={'email'} placeholder={'email'}/>
                     </div>
                     <div>
-                        <Field placeholder={'password'} type={'text'} name={'password'} id={'password'}/>
-                        <div><ErrorMessage name={'password'}/></div>
+                        <FormControl control={'password'} name={'password'} placeholder={'password'}/>
                     </div>
                     <div>
                         <Field type={'checkbox'} name={'rememberMe'} id={'rememberMe'}/>
                         <label htmlFor={'rememberMe'}>remember me</label>
                     </div>
                     <div>
-                        <button type={'submit'}>Login</button>
+                        <button className={a.button} type={'submit'}>Login</button>
                     </div>
                 </Form>
             </Formik>
@@ -50,4 +65,7 @@ const Login = () => {
     );
 };
 
-export default Login;
+const mapStateToProps = (state: RootStateType): MapStateTotPropsType => {
+    return {isAuth: state.auth.isAuth}
+}
+export default connect(mapStateToProps, {login})(Login);
