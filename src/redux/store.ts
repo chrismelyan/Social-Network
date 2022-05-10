@@ -22,7 +22,7 @@ export type AppActionsType = AuthReducerActionType
 
 // ThunkAction type:
 // 1 - return type used by getState (void)
-// 2 - state type (RootTypeState)
+// 2 - state type (RootTypeState)<
 // 3 - any 'extra arguments' injected into the thunk ( unknown )
 // 4 - all state actions
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootStateType, unknown, AppActionsType>
