@@ -26,4 +26,4 @@ export function withAuthRedirect <T>(Component: ComponentType<T>) {
     (RedirectComponent)
 
     return ConnectedAuthRedirectComponent;
-};
+}

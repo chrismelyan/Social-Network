@@ -51,27 +51,28 @@ export const setUserDataAC = (id: number | null, email: string | null, login: st
 } as const);
 
 // THUNK CREATORS
-export const getAuthUserData = (): AppThunk => async dispatch => {
-    const response = await authAPI.me()
+export const getAuthUserData = (): AppThunk => (dispatch) => {
+    return authAPI.me().then(response => {
         if (response.data.resultCode === 0) {
             let {id, email, login} = response.data.data;
             dispatch(setUserDataAC(id, email, login, true));
         }
+    })
 }
 export const login = (email: string, password: string, rememberMe: boolean,
                       setStatus: (status?: any) => void): AppThunk => async dispatch => {
     const res = await authAPI.login(email, password, rememberMe)
-        if (res.data.resultCode === 0) {
-            dispatch(getAuthUserData());
-        }  else {
-            setStatus(res.data.messages)
-        }
+    if (res.data.resultCode === 0) {
+        dispatch(getAuthUserData());
+    } else {
+        setStatus(res.data.messages)
+    }
 }
 export const logout = (): AppThunk => async dispatch => {
     const res = await authAPI.logout()
-        if (res.data.resultCode === 0) {
-            dispatch(setUserDataAC(null, null, null, false));
-        }
+    if (res.data.resultCode === 0) {
+        dispatch(setUserDataAC(null, null, null, false));
+    }
 }
 
 export default authReducer;
