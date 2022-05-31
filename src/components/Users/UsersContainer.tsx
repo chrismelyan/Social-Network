@@ -6,7 +6,7 @@ import {
 import {RootStateType} from "../../redux/store";
 import React from "react";
 import Users from "./Users";
-import Preloader from "../../common/Preloader";
+import Preloader from "../../common/Preloader/Preloader";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 import {
@@ -34,13 +34,13 @@ export type MapDispatchToPropsType = {
 export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 class UsersContainer extends React.Component<UsersPropsType, UsersResponseType> {
-
     componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize);
+        const {currentPage, pageSize, getUsers} = this.props;
+        getUsers(currentPage, pageSize);
     }
-
     onPage = (pageNumber: number) => {
-        this.props.getUsers(pageNumber, this.props.pageSize);
+        const {pageSize, getUsers} = this.props;
+        getUsers(pageNumber, pageSize);
     }
 
     render() {
@@ -60,7 +60,6 @@ class UsersContainer extends React.Component<UsersPropsType, UsersResponseType> 
         </>
     }
 }
-
 const mapStateToProps = (state: RootStateType): MapStateToPropsType => {
     return {
         users: getUsersSelector(state),
@@ -71,6 +70,5 @@ const mapStateToProps = (state: RootStateType): MapStateToPropsType => {
         followingInProgress: getFollowingInProgress(state)
     }
 }
-
 export default compose<React.ComponentType>(withAuthRedirect, connect<MapStateToPropsType, MapDispatchToPropsType, {}, RootStateType>
 (mapStateToProps, {getUsers, followUsers, unFollowUsers}))(UsersContainer);

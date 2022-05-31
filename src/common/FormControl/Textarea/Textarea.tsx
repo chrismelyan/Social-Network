@@ -1,7 +1,7 @@
 import React from 'react';
 import {ErrorMessage, Field, FormikValues} from "formik";
 import a from './Textarea.module.css'
-import s from "./Input.module.css";
+import s from "../Input/Input.module.css";
 
 const Textarea = (props: FormikValues) => {
     const {name, placeholder} = props

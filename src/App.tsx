@@ -15,7 +15,7 @@ import {compose} from "redux";
 import {withRouter} from "./components/Profile/ComponentWithRouterProps";
 import {initializeApp} from "./redux/app-reducer";
 import {RootStateType} from "./redux/store";
-import Preloader from "./common/Preloader";
+import Preloader from "./common/Preloader/Preloader";
 
 type MapDispatchToPropsType = {
     initializeApp: () => void
@@ -24,6 +24,7 @@ type MapStateToPropsType = {
     initialized: boolean
 }
 type AppType = MapDispatchToPropsType & MapStateToPropsType
+
 class App extends React.Component<AppType> {
     componentDidMount() {
         this.props.initializeApp()
@@ -65,4 +66,4 @@ const mapStateToProps = (state: RootStateType): MapStateToPropsType => {
     }
 }
 
-export default compose( withRouter, connect(mapStateToProps, {initializeApp}))(App);
+export default compose(withRouter, connect(mapStateToProps, {initializeApp}))(App);

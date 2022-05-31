@@ -2,8 +2,8 @@ import React from 'react';
 import {Formik, Form, Field, FormikValues, FormikHelpers, FormikProps} from 'formik';
 import * as Yup from 'yup';
 import s from './Login.module.css'
-import a from '../../common/Button.module.css'
-import FormControl from "../../common/FormControl";
+import a from '../../common/Button/Button.module.css'
+import FormControl from "../../common/FormControl/FormControl";
 import {connect} from "react-redux";
 import {login} from "../../redux/auth-reducer";
 import {RootStateType} from "../../redux/store";
@@ -21,7 +21,7 @@ type LoginType = {
 type MapStateTotPropsType = {
     isAuth: boolean
 }
-const Login = (props: LoginType) => {
+const Login = ({login, isAuth}: LoginType) => {
     const initialValues: InitialValuesType = {
         email: '',
         password: '',
@@ -32,11 +32,11 @@ const Login = (props: LoginType) => {
         password: Yup.string().required('Required').min(5, 'Minimum 5 symbols'),
     })
     const onSubmit = (values: InitialValuesType, {setSubmitting, setStatus}: FormikHelpers<InitialValuesType>) => {
-        props.login(values.email, values.password, values.rememberMe, setStatus)
+        login(values.email, values.password, values.rememberMe, setStatus)
         setSubmitting(false)
     }
 
-    if (props.isAuth) {
+    if (isAuth) {
         return <Navigate to={"/profile"}/>
     }
 
@@ -72,7 +72,6 @@ const Login = (props: LoginType) => {
                         </Form>
                     )
                 }}
-
             </Formik>
         </div>
     );

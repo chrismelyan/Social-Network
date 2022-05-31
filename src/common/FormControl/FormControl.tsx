@@ -1,7 +1,7 @@
 import React from 'react';
-import Textarea from "./Textarea";
-import Input from "./Input";
-import Password from "./Password";
+import Textarea from "./Textarea/Textarea";
+import Input from "./Input/Input";
+import Password from "./Password/Password";
 import {FormikValues} from "formik";
 
 const FormControl = (props: FormikValues) => {

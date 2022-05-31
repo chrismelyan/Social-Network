@@ -1,7 +1,7 @@
 import React from 'react';
 import {Form, Formik} from "formik";
-import s from "../../../common/Button.module.css";
-import FormControl from "../../../common/FormControl";
+import s from "../../../common/Button/Button.module.css";
+import FormControl from "../../../common/FormControl/FormControl";
 import * as Yup from "yup";
 
 type AddPostFormType = {

@@ -1,0 +1,23 @@
+.user {
+    display: flex;
+    margin: 10px 20px;
+}
+
+.avatar {
+    display: flex;
+    flex-direction: column;
+}
+
+.avatar img {
+    width: 70px;
+    margin-bottom: 5px;
+}
+
+.userBlock {
+    border: 1px solid #8c91b6;
+    border-radius: 10px;
+    width: 500px;
+    padding: 10px;
+    display: flex;
+    margin-left: 20px;
+}

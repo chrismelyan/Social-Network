@@ -1,7 +1,7 @@
 import {authAPI} from "../api/api";
 import {AppThunk} from "./store";
 
-const SET_USER_DATA = 'SET-USER-DATA';
+const SET_USER_DATA = 'auth/SET-USER-DATA';
 
 export type AuthDataType = {
     id: number | null
@@ -51,14 +51,14 @@ export const setUserDataAC = (id: number | null, email: string | null, login: st
 } as const);
 
 // THUNK CREATORS
-export const getAuthUserData = (): AppThunk => (dispatch) => {
-    return authAPI.me().then(response => {
-        if (response.data.resultCode === 0) {
-            let {id, email, login} = response.data.data;
-            dispatch(setUserDataAC(id, email, login, true));
-        }
-    })
+export const getAuthUserData = (): AppThunk => async dispatch => {
+    const response = await authAPI.me()
+    if (response.data.resultCode === 0) {
+        let {id, email, login} = response.data.data;
+        dispatch(setUserDataAC(id, email, login, true));
+    }
 }
+
 export const login = (email: string, password: string, rememberMe: boolean,
                       setStatus: (status?: any) => void): AppThunk => async dispatch => {
     const res = await authAPI.login(email, password, rememberMe)

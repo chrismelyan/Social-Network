@@ -25,20 +25,18 @@ export type MapDispatchToPropsType = {
     getUserProfile: (userId: number) => void
     getUserStatus: (userId: number) => void
     updateUserStatus: (status: string) => void
-
 }
-
 type ProfileContainerType = MapStateToPropsType & MapDispatchToPropsType & RouteComponentProps<PathParamsType>
 
 class ProfileContainer extends React.Component<ProfileContainerType, ProfilePageType> {
-
     componentDidMount() {
-        let userId = this.props.router.params.userId
+        const {authorizedUserId, router, getUserProfile, getUserStatus} = this.props;
+        let userId = router.params.userId
         if (!userId) {
-            userId = this.props.authorizedUserId
+            userId = authorizedUserId
         }
-        this.props.getUserProfile(userId);
-        this.props.getUserStatus(userId);
+        getUserProfile(userId);
+        getUserStatus(userId);
     }
 
     render() {

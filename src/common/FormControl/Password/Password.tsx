@@ -1,6 +1,6 @@
 import React from 'react';
 import {ErrorMessage, Field, FormikValues} from "formik";
-import s from './Input.module.css'
+import s from '../Input/Input.module.css'
 
 const Password = (props: FormikValues) => {
     const {name, placeholder} = props
