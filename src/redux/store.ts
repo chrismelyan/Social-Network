@@ -5,6 +5,11 @@ import usersReducer, {UsersReducerActionType} from "./users-reducer";
 import authReducer, {AuthReducerActionType} from "./auth-reducer";
 import thunkMiddleware, {ThunkAction} from 'redux-thunk'
 import appReducer, {AppReducerActionType} from "./app-reducer";
+import {Simulate} from "react-dom/test-utils";
+import compositionEnd = Simulate.compositionEnd;
+
+// @ts-ignore
+const composeEnhancer = window._REDUX_DEVTOOLS_EXTENSION_COMPOSE_ || compose;
 
 let rootReducer = combineReducers({
     profilePage: profileReducer,
@@ -13,7 +18,7 @@ let rootReducer = combineReducers({
     auth: authReducer,
     app: appReducer
 })
-const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
+const store = createStore(rootReducer, composeEnhancer(applyMiddleware(thunkMiddleware)));
 
 // TYPES
 export type RootStateType = ReturnType<typeof rootReducer>;
