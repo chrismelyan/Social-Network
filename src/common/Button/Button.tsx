@@ -6,10 +6,10 @@ type ButtonType = {
     callback: () => void
 }
 
-const Button = (props: ButtonType) => {
+const Button = ({title, callback}: ButtonType) => {
     return (
         <div>
-            <button onClick={props.callback} className={s.button}>{props.title}</button>
+            <button onClick={callback} className={s.button}>{title}</button>
         </div>
     );
 };

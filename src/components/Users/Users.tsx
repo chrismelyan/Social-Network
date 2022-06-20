@@ -29,13 +29,7 @@ const Users: React.FC<PropsType> = props => {
 
     return (
         <div className={s.tabContainer}>
-            <Paginator
-                totalUsersCount={totalUsersCount}
-                pageSize={pageSize}
-                currentPage={currentPage}
-                callbackOnPage={onPage}
-            />
-            <div>
+            <div className={s.usersWrapper}>
             {
                 users.map(el => {
                     return <User
@@ -47,6 +41,15 @@ const Users: React.FC<PropsType> = props => {
                     />
                 })
             }
+            </div>
+            <div className={s.paginator}>
+            <Paginator
+                totalItemsCount={totalUsersCount}
+                pageSize={pageSize}
+                currentPage={currentPage}
+                callbackOnPage={onPage}
+                portionSize={10}
+            />
             </div>
         </div>
     );
