@@ -1,12 +1,10 @@
-import React from 'react';
+import React, {Suspense} from 'react';
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
-import ProfileContainer from "./components/Profile/ProfileContainer";
 import {Route, Routes} from 'react-router-dom';
 import Music from "./components/Pages/Music/Music";
 import News from "./components/Pages/News/News";
 import Settings from "./components/Pages/Settings/Settings";
-import {DialoguesContainer} from "./components/Pages/Dialogues/DialoguesContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
@@ -16,6 +14,11 @@ import {withRouter} from "./components/Profile/ComponentWithRouterProps";
 import {initializeApp} from "./redux/app-reducer";
 import {RootStateType} from "./redux/store";
 import Preloader from "./common/Preloader/Preloader";
+import withSuspense from "./hoc/withSuspense";
+
+// import ProfileContainer from "./components/Profile/ProfileContainer";
+const ProfileContainer = React.lazy(() => import("./components/Profile/ProfileContainer"));
+const DialoguesContainer = React.lazy(() => import("./components/Pages/Dialogues/DialoguesContainer"));
 
 type MapDispatchToPropsType = {
     initializeApp: () => void
@@ -40,12 +43,11 @@ class App extends React.Component<AppType> {
                 <Navbar/>
                 <div className='app-wrapper-content'>
                     <Routes>
-                        <Route path={'/profile'} element={<ProfileContainer/>}>
-                            <Route path={':userId'} element={<ProfileContainer/>}
-                            />
+                        <Route path={'/profile'} element={withSuspense(ProfileContainer)}>
+                            <Route path={':userId'}  element={withSuspense(ProfileContainer)}/>
                         </Route>
-                        <Route path={'/dialogues'} element={<DialoguesContainer/>}>
-                            <Route path={':id'} element={<DialoguesContainer/>}
+                        <Route path={'/dialogues'} element={withSuspense(DialoguesContainer)}>
+                            <Route path={':id'} element={withSuspense(DialoguesContainer)}
                             />
                         </Route>
                         <Route path={'/users'} element={<UsersContainer/>}/>
