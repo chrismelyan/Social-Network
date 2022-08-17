@@ -13,6 +13,14 @@ type UserComponentType = {
 }
 
 const User = ({user, followingInProgress, followUsers, unFollowUsers}: UserComponentType) => {
+    const userName = (name: string) => {
+        if (name.length > 12) {
+            let newName = name.slice(0, 12)
+            return newName + '...';
+        }
+        return name;
+    }
+
     return (
         <div className={s.user}>
             <div className={s.avatar}>
@@ -20,7 +28,7 @@ const User = ({user, followingInProgress, followUsers, unFollowUsers}: UserCompo
                     <img src={user.photos.small !== null ? user.photos.small : userPhoto} alt={'avatar'}/>
                 </NavLink>
                 <div className={s.userName}>
-                    {user.name}
+                    {userName(user.name)}
                 </div>
                 {user.followed
                     ? <button

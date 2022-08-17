@@ -1,6 +1,6 @@
 .app-wrapper {
     margin: 0 auto;
-    width: 1200px;
+    width: 80%;
     display: grid;
     grid-template-areas:
    "h h"
@@ -9,7 +9,6 @@
     grid-template-rows: 70px 1fr;
     grid-template-columns: 2fr 10fr;
     grid-gap: 15px;
-    /* grid-gap: 10px; */
 }
 
 .app-wrapper-content {
