@@ -5,6 +5,7 @@ const ADD_POST = 'profile/ADD-POST';
 const SET_USER_PROFILE = 'profile/SET-USER-PROFILE';
 const SET_STATUS = 'profile/SET-STATUS';
 const DELETE_POST = 'profile/DELETE-POST';
+const SAVE_PHOTO_SUCCESS = 'profile/SAVE-PHOTO-SUCCESS';
 
 export type ProfilePageType = {
     posts: PostsType[]
@@ -18,7 +19,7 @@ export type ProfileResponseType = {
     lookingForAJobDescription: string
     fullName: string
     userId: number
-    photos: { small: string, large: string }
+    photos: PhotosType
 }
 type ContactsType = {
     facebook: string
@@ -30,6 +31,10 @@ type ContactsType = {
     github: string
     mainLink: string
 }
+type PhotosType = {
+    small: string
+    large: string
+}
 export type PostsType = {
     id: number
     message: string
@@ -38,10 +43,8 @@ export type PostsType = {
 
 const initialProfile: ProfilePageType = {
     posts: [
-        {id: 1, message: "Hi, how are you?", likesCount: 34},
-        {id: 2, message: "Need more time!!", likesCount: 135},
-        {id: 3, message: "Great app", likesCount: 78},
-        {id: 4, message: "It's my first post", likesCount: 14}
+        {id: 1, message: "Great app", likesCount: 78},
+        {id: 2, message: "It's my first post", likesCount: 14}
     ],
     profile: null,
     status: ''
@@ -62,7 +65,9 @@ const profileReducer = (state: ProfilePageType = initialProfile,
         case SET_USER_PROFILE:
             return {...state, profile: action.profile};
         case SET_STATUS:
-            return {...state, status: action.status}
+            return {...state, status: action.status};
+        case SAVE_PHOTO_SUCCESS:
+            return {...state, profile: {...state.profile, photos: action.photos} as ProfileResponseType}
         default:
             return state;
     }
@@ -72,12 +77,14 @@ export type ProfileReducerActionType = ReturnType<typeof addPostAC>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setStatus>
     | ReturnType<typeof deletePostAC>
+    | ReturnType<typeof savePhotoSuccess>
 
 // ACTION CREATORS
 export const addPostAC = (postMessage: string) => ({type: ADD_POST, postMessage} as const)
 export const deletePostAC = (postId: number) => ({type: DELETE_POST, postId} as const)
 export const setUserProfile = (profile: ProfileResponseType) => ({type: SET_USER_PROFILE, profile} as const)
 export const setStatus = (status: string) => ({type: SET_STATUS, status} as const)
+export const savePhotoSuccess = (photos: PhotosType) => ({type: SAVE_PHOTO_SUCCESS, photos} as const)
 
 // THUNK CREATORS
 export const getUserProfile = (userId: number): AppThunk => async dispatch => {
@@ -92,6 +99,12 @@ export const updateUserStatus = (status: string): AppThunk => async dispatch => 
     const response = await profileAPI.updateStatus(status)
     if (response.data.resultCode === 0) {
         dispatch(setStatus(status));
+    }
+}
+export const savePhoto = (photo: File): AppThunk => async dispatch => {
+    let response = await profileAPI.savePhotoSuccess(photo);
+    if (response.data.resultCode === 0) {
+        dispatch(savePhotoSuccess(response.data.data));
     }
 }
 

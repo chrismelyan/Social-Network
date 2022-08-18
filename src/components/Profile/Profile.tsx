@@ -9,6 +9,8 @@ type ProfileType = {
     profile: ProfileResponseType | null
     status: string
     updateUserStatus: (status: string) => void
+    isOwner: boolean
+    savePhoto: (photo: File) => void
 }
 
 const Profile = (props: ProfileType) => {
@@ -17,7 +19,13 @@ const Profile = (props: ProfileType) => {
     }
     return (
         <div>
-            <ProfileInfo profile={props.profile} status={props.status} updateUserStatus={props.updateUserStatus}/>
+            <ProfileInfo
+                isOwner={props.isOwner}
+                savePhoto={props.savePhoto}
+                profile={props.profile}
+                status={props.status}
+                updateUserStatus={props.updateUserStatus}
+            />
             <hr/>
             <AboutMe aboutMe={props.profile.aboutMe}/>
             <hr/>
