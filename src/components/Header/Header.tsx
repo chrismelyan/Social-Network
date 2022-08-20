@@ -1,12 +1,12 @@
 import React from 'react';
 import s from './Header.module.css';
 import {NavLink} from "react-router-dom";
-import {ProfileResponseType} from "../../redux/profile-reducer";
+import {ProfileType} from "../../redux/profile-reducer";
 
 type HeaderType = {
     isAuth: boolean
     login: string | null
-    profile: ProfileResponseType | null
+    profile: ProfileType | null
     logout: () => void
 }
 

@@ -1,22 +1,24 @@
 import React, {ChangeEvent} from 'react';
-import s from './ProfileInfo.module.css'
-import {ProfileResponseType} from "../../../redux/profile-reducer";
-import ProfileStatus from './ProfileStatus'
+import s from './ProfileInfo.module.css';
+import {PhotosType, ProfileType} from "../../../redux/profile-reducer";
+import ProfileStatus from './ProfileStatus';
 import Preloader from "../../../common/Preloader/Preloader";
 import profilePhoto from '../../../assets/images/user.png';
+import backgroundPhoto from '../../../assets/images/background.jpg';
 
 type ProfileInfoType = {
-    profile: ProfileResponseType | null
+    profile: ProfileType | null
     status: string
     updateUserStatus: (status: string) => void
     isOwner: boolean
     savePhoto: (photo: File) => void
+    photos: PhotosType
 }
 
-const ProfileInfo = ({profile, status, updateUserStatus, isOwner, savePhoto}: ProfileInfoType) => {
+const ProfileInfo = ({profile, photos, status, updateUserStatus, isOwner, savePhoto}: ProfileInfoType) => {
     if (!profile) {
         return <Preloader/>
-    };
+    }
 
     const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.currentTarget.files && e.currentTarget.files.length) {
@@ -28,15 +30,14 @@ const ProfileInfo = ({profile, status, updateUserStatus, isOwner, savePhoto}: Pr
         <div>
             <div className={s.container}>
                 <img className={s.backgroundPhoto}
-                     src='https://images.pexels.com/photos/813465/pexels-photo-813465.jpeg?cs=srgb&dl=pexels-michael-spadoni-813465.jpg&fm=jpg'
-                     alt={'background'}/>
+                     src={backgroundPhoto} alt={'background'}/>
                 <div className={s.profilePhotoWrapper}>
-                    <img className={s.profilePhoto} src={profile.photos.large ?? profilePhoto} alt={'profile'}/>
+                    <img className={s.profilePhoto} src={photos.large ?? profilePhoto} alt={'profile'}/>
                     {isOwner && <input type={'file'} onChange={onMainPhotoSelected}/>}
                 </div>
             </div>
             <div className={s.descriptionBlock}>
-                <h1>{profile.fullName}</h1>
+                <h1 className={s.name}>{profile.fullName}</h1>
                 <ProfileStatus status={status} updateUserStatus={updateUserStatus}/>
             </div>
         </div>

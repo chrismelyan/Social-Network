@@ -1,0 +1,125 @@
+.darkBG {
+    background-color: rgba(0, 0, 0, 0.2);
+    width: 100%;
+    min-height: 100vh;
+    z-index: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.modal {
+    width: 450px;
+    height: 600px;
+    background: white;
+    color: white;
+    z-index: 10;
+    border-radius: 6px;
+    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.4);
+}
+
+.modalHeader {
+    height: 50px;
+    background: white;
+    overflow: hidden;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+}
+
+.heading {
+    margin: 0;
+    padding: 20px;
+    color: #2c3e50;
+    font-weight: 500;
+    font-size: 22px;
+    text-align: center;
+}
+
+.modalContent {
+    padding: 30px;
+    width: 100%;
+    font-size: 14px;
+    color: #2c3e50;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.inputBlock {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.input {
+    width: 100%;
+    padding: 5px;
+    margin: 6px auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    outline: none;
+    display: inline-block;
+}
+
+.label {
+    width: 170px;
+    margin-right: 30px;
+    text-align: left;
+}
+
+.buttons {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.backBtn {
+    cursor: pointer;
+    font-weight: 500;
+    display: block;
+    text-align: center;
+    vertical-align: middle;
+    color: #fff;
+    background-color: #ff3e4e;
+    border: 1px solid #ff3e4e;
+    padding: 0.375rem 0.75rem;
+    font-size: .875rem;
+    border-radius: 5px;
+    text-decoration: none;
+    margin: 8px 0;
+}
+
+.backBtn:hover {
+    background-color: #db2a38;
+}
+
+.submitBtn {
+    color: #fff;
+    background-color: #50b5ff;
+    display: block;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #50b5ff;
+    padding: 0.375rem 0.75rem;
+    font-size: .875rem;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    margin: 8px 0;
+}
+
+.submitBtn:hover {
+    background-color: #449ad9;
+}

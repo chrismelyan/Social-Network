@@ -2,9 +2,9 @@ import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {
-    getUserProfile, getUserStatus,
+    getUserProfile, getUserStatus, PhotosType,
     ProfilePageType,
-    ProfileResponseType, savePhoto, updateUserStatus
+    ProfileType, savePhoto, updateUserStatus
 } from "../../redux/profile-reducer";
 import {RootStateType} from "../../redux/store";
 import {withRouter} from "./ComponentWithRouterProps";
@@ -16,10 +16,11 @@ type PathParamsType = {
     router: any
 }
 type MapStateToPropsType = {
-    profile: ProfileResponseType | null
+    profile: ProfileType | null
     isAuth: boolean
     status: string
     authorizedUserId: number | null
+    photos: PhotosType
 }
 export type MapDispatchToPropsType = {
     getUserProfile: (userId: number) => void
@@ -59,6 +60,7 @@ class ProfileContainer extends React.Component<ProfileContainerType, ProfilePage
             <Profile
                 {...this.props}
                 savePhoto={this.props.savePhoto}
+                photos={this.props.photos}
                 isOwner={!this.props.router.params.userId}
                 profile={this.props.profile}
                 status={this.props.status}
@@ -72,7 +74,8 @@ let mapStateToProps = (state: RootStateType): MapStateToPropsType => ({
     profile: state.profilePage.profile,
     isAuth: state.auth.isAuth,
     status: state.profilePage.status,
-    authorizedUserId: state.auth.id
+    authorizedUserId: state.auth.id,
+    photos: state.profilePage.photos
 })
 
 export default compose<React.ComponentType>(withAuthRedirect, withRouter,
