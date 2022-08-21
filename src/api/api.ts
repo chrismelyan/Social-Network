@@ -49,14 +49,14 @@ export const profileAPI = {
     savePhotoSuccess (photo: File) {
         const formData = new FormData();
         formData.append('image', photo)
-        return instance.put<SavePhotoResponseType>(`/profile/photo`, formData, {
+        return instance.put<SavePhotoResponseType>(`profile/photo`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
         })
     },
     saveProfile (profileData: ProfileType) {
-        return instance.put<SaveProfileResponseType>('/profile', profileData)
+        return instance.put<SaveProfileResponseType>('profile', profileData)
     }
 }
 
@@ -64,11 +64,21 @@ export const authAPI = {
     me() {
         return instance.get(`auth/me`)
     },
-    login(email: string, password: string, rememberMe: boolean) {
-        return instance.post<LoginResponseType>('auth/login', {email, password, rememberMe: false});
+    login(email: string, password: string, rememberMe: boolean, captcha: string | null) {
+        return instance.post<LoginResponseType>('auth/login', {email, password, rememberMe, captcha});
     },
     logout() {
         return instance.delete('auth/login');
+    }
+}
+
+export const securityAPI = {
+    getCaptcha() {
+        return instance.get('security/get-captcha-url', {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
     }
 }
 
