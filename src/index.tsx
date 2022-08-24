@@ -2,7 +2,7 @@ import React from 'react';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import ReactDOM from "react-dom";
-import {BrowserRouter} from "react-router-dom";
+import {HashRouter} from "react-router-dom";
 import App from "./App";
 import store from "./redux/store"
 import {Provider} from "react-redux";
@@ -10,11 +10,11 @@ import {Provider} from "react-redux";
 
 export let rerenderEntireTree = () => {
     ReactDOM.render(
-            <BrowserRouter>
+            <HashRouter>
                 <Provider store={store}>
                 <App />
                 </Provider>
-            </BrowserRouter>,
+            </HashRouter>,
         document.getElementById('root')
     );
 }

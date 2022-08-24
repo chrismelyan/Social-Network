@@ -27,3 +27,16 @@
 .loginBlock a {
     color: white;
 }
+
+.loginButtonWrapper {
+    background-color: #28436a;
+    padding: 5px;
+    width: 60px;
+    text-align: center;
+    border-radius: 2px;
+}
+
+.loginButton {
+    text-decoration: none;
+    color: aliceblue;
+}

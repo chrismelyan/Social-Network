@@ -26,7 +26,9 @@ const Header = (props: HeaderType) => {
                             <div>Welcome, {props.login}</div>
                            <button onClick={props.logout}>Log out</button>
                         </div>
-                        : <NavLink to={'/login'}>Login</NavLink>
+                        : <div className={s.loginButtonWrapper}>
+                            <NavLink className={s.loginButton} to={'/login'}>Login</NavLink>
+                        </div>
                 }
             </div>
         </div>

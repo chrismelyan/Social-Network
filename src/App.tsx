@@ -46,18 +46,19 @@ class App extends React.Component<AppType> {
                 <Navbar/>
                 <div className='app-wrapper-content'>
                     <Routes>
-                        <Route path={'/profile'} element={<SuspendedProfile/>}>
+                        <Route path={'/'} element={<SuspendedProfile/>}/>
+                        <Route path={'profile'} element={<SuspendedProfile/>}>
                             <Route path={':userId'}  element={<SuspendedProfile/>}/>
                         </Route>
-                        <Route path={'/dialogues'} element={<SuspendedDialogues/>}>
+                        <Route path={'dialogues'} element={<SuspendedDialogues/>}>
                             <Route path={':id'} element={<SuspendedDialogues/>}
                             />
                         </Route>
-                        <Route path={'/users'} element={<UsersContainer/>}/>
-                        <Route path={'/music'} element={<Music/>}/>
-                        <Route path={'/news'} element={<News/>}/>
-                        <Route path={'/settings'} element={<Settings/>}/>
-                        <Route path={'/login'} element={<Login/>}/>
+                        <Route path={'users'} element={<UsersContainer/>}/>
+                        <Route path={'music'} element={<Music/>}/>
+                        <Route path={'news'} element={<News/>}/>
+                        <Route path={'settings'} element={<Settings/>}/>
+                        <Route path={'login'} element={<Login/>}/>
                     </Routes>
                 </div>
             </div>

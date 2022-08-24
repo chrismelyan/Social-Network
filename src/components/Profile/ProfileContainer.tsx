@@ -37,7 +37,7 @@ class ProfileContainer extends React.Component<ProfileContainerType, ProfilePage
         if (!userId) {
             userId = authorizedUserId;
             if(!userId) {
-                router.history.push('/login');
+                router.history.push('login');
             }
         }
         if (userId) {
