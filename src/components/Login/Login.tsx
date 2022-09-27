@@ -58,10 +58,10 @@ const Login = ({login, isAuth, captchaUrl}: LoginType) => {
                     return (
                         <Form>
                             <div>
-                                <p>To log in get registered
+                                <p>{'To log in get registered '}
                                     <a style={{color: 'white'}} href={'https://social-network.samuraijs.com/'}
                                        target={'_blank'}
-                                       rel="noopener noreferrer"> here
+                                       rel="noopener noreferrer">here
                                     </a>
                                 </p>
                                 <p>or use common test account credentials:</p>
