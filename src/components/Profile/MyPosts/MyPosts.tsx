@@ -4,7 +4,6 @@ import Post from "./Post/Post";
 import {PostsType} from "../../../redux/profile-reducer";
 import AddPostForm from "./AddPostForm";
 
-
 type MyPostsType = {
     posts: Array<PostsType>
     onAddPost: (value: string) => void
@@ -21,7 +20,7 @@ const MyPosts = (props: MyPostsType) => {
     return (
         <div className={s.postsBlock}>
             <h3 style={{color: '#8c91b6'}}>My posts</h3>
-            <div>
+            <div className={s.textareaWrapper}>
                 <AddPostForm addPost={addPost}/>
             </div>
             <div className={s.posts}>

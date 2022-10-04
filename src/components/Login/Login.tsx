@@ -43,7 +43,7 @@ const Login = ({login, isAuth, captchaUrl}: LoginType) => {
     }
 
     if (isAuth) {
-        return <Navigate to={"profile"}/>
+        return <Navigate to={"/profile"}/>
     }
 
     return (

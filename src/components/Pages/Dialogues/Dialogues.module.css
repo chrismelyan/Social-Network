@@ -1,6 +1,6 @@
 .dialogues {
     display: grid;
-    grid-template-columns: 2fr 10fr;
+    grid-template-columns: 2fr 9fr;
 }
 
 .dialoguesItems {
@@ -9,7 +9,7 @@
 }
 
 .item {
-    margin: 20px;
+    margin: 30px 20px 30px 20px;
 }
 
 .messageBlock {
@@ -26,7 +26,6 @@
     background-color: #1e2745;
     border: 2px solid #44496f;
     border-radius: 5px;
-    font-size: large;
     margin-bottom: 20px;
 }
 

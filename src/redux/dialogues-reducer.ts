@@ -17,7 +17,7 @@ const initialDialogues: DialoguesPageType = {
     dialogues: [
         {id: 1, name: 'Chris'},
         {id: 2, name: 'Kristen'},
-        {id: 3, name: 'Victor'},
+        {id: 3, name: 'Robert'},
         {id: 4, name: 'Mary'},
         {id: 5, name: 'Zac'},
         {id: 6, name: 'Carey'}

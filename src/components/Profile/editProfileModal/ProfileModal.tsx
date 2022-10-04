@@ -46,7 +46,6 @@ const ProfileModal = ({profile, setEditMode}: ProfileModalType) => {
             }
             dispatch(saveProfile(profileData))
             setEditMode(false);
-
         },
     });
 

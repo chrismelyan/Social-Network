@@ -51,8 +51,8 @@ export type PostsType = {
 
 const initialProfile: ProfilePageType = {
     posts: [
-        {id: 1, message: "Great app", likesCount: 78},
-        {id: 2, message: "It's my first post", likesCount: 14}
+        {id: 1, message: "It's been tough. Guess I need more sleep and coffee.", likesCount: 78},
+        {id: 2, message: "Let's get it started. Wanna have some fun?", likesCount: 14}
     ],
     profile: null,
     status: '',
